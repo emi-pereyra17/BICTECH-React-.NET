@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BicTechBack", "BicTechBack\BicTechBack.csproj", "{8A177184-3480-40F3-9E3D-9394DD6F4EAA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8A177184-3480-40F3-9E3D-9394DD6F4EAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A177184-3480-40F3-9E3D-9394DD6F4EAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A177184-3480-40F3-9E3D-9394DD6F4EAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A177184-3480-40F3-9E3D-9394DD6F4EAA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E1EB9952-E122-4D40-8B80-7DBCD624E75C}
+	EndGlobalSection
+EndGlobal
