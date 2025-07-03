@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.6">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
@@ -14,9 +20,7 @@
     <Folder Include="src\API\Controllers\" />
     <Folder Include="src\API\Extensions\" />
     <Folder Include="src\Core\Exceptions\" />
-    <Folder Include="src\Infrastructure\Data\" />
     <Folder Include="src\Infrastructure\Services\" />
-    <Folder Include="src\Infrastructure\Repositories\" />
     <Folder Include="tests\IntegrationTests\" />
     <Folder Include="tests\UnitTests\" />
   </ItemGroup>
