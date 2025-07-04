@@ -16,5 +16,26 @@ namespace BicTechBack.src.Infrastructure.Data
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Marca> Marcas { get; set; }
         public DbSet<CategoriaMarca> CategoriasMarcas { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Producto>()
+                .Property(p => p.Precio)
+                .HasColumnType("decimal(18,2)");
+
+            modelBuilder.Entity<Pedido>()
+                .Property(p => p.Total)
+                .HasColumnType("decimal(18,2)");
+
+            modelBuilder.Entity<PedidoDetalle>()
+                .Property(pd => pd.Precio)
+                .HasColumnType("decimal(18,2)");
+
+            modelBuilder.Entity<PedidoDetalle>()
+                .Property(pd => pd.Subtotal)
+                .HasColumnType("decimal(18,2)");
+        }
     }
 }

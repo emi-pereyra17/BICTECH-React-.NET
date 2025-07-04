@@ -1,33 +1,58 @@
 ﻿using BicTechBack.src.Core.Entities;
 using BicTechBack.src.Core.Interfaces;
+using BicTechBack.src.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace BicTechBack.src.Infrastructure.Repositories
 {
     public class ProductoRepository : IProductoRepository
     {
-        public Task<Producto> AddAsync(Producto producto)
+        private readonly AppDbContext _context;
+
+        public ProductoRepository(AppDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task<bool> DeleteAsync(int id)
+        public async Task<Producto> AddAsync(Producto producto)
         {
-            throw new NotImplementedException();
+            _context.Productos.Add(producto);
+            await _context.SaveChangesAsync();
+            return producto;
         }
 
-        public Task<IEnumerable<Producto>> GetAllAsync()
+        public async Task<bool> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var producto = await _context.Productos.FindAsync(id);
+            if (producto == null)
+                return false;
+
+            _context.Productos.Remove(producto);
+            await _context.SaveChangesAsync();
+            return true;   
         }
 
-        public Task<Producto> GetByIdAsync(int id)
+        public async Task<IEnumerable<Producto>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Productos
+                .Include(p => p.Categoria)
+                .Include(p => p.Marca)
+                .ToListAsync();
         }
 
-        public Task<Producto> UpdateAsync(Producto producto)
+        public async Task<Producto?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Productos
+                .Include(p => p.Categoria)
+                .Include(p => p.Marca)
+                .FirstOrDefaultAsync(p => p.Id == id);
+        }
+
+        public async Task<Producto> UpdateAsync(Producto producto)
+        {
+            _context.Productos.Update(producto);
+            await _context.SaveChangesAsync();
+            return producto;
         }
     }
 }
