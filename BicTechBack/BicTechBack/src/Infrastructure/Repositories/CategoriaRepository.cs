@@ -31,6 +31,11 @@ namespace BicTechBack.src.Infrastructure.Repositories
             return true;
         }
 
+        public async Task<bool> ExistsAsync(int id)
+        {
+            return await _context.Categorias.AnyAsync(c => c.Id == id);
+        }
+
         public async Task<IEnumerable<Categoria>> GetAllAsync()
         {
             return await _context.Categorias

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BicTechBack.src.Core.DTOs;
+using BicTechBack.src.Core.Entities;
 using BicTechBack.src.Core.Interfaces;
 
 namespace BicTechBack.src.Infrastructure.Services
@@ -7,36 +8,83 @@ namespace BicTechBack.src.Infrastructure.Services
     public class ProductoService : IProductoService
     {
         private readonly IProductoRepository _repository;
+        private readonly ICategoriaRepository _categoriaRepository;
+        private readonly IMarcaRepository _marcaRepository;
         private readonly IMapper _mapper;
 
-        public ProductoService(IProductoRepository repository, IMapper mapper)
+        public ProductoService(IProductoRepository repository, IMarcaRepository marcaRepository, ICategoriaRepository categoriaRepository, IMapper mapper)
         {
             _repository = repository;
+            _categoriaRepository = categoriaRepository;
+            _marcaRepository = marcaRepository;
             _mapper = mapper;
         }
-        public Task<ProductoDTO> CreateProductoAsync(CrearProductoDTO dto)
+        public async Task<ProductoDTO> CreateProductoAsync(CrearProductoDTO dto)
         {
-            throw new NotImplementedException();
+            var productos = await _repository.GetAllAsync();
+            if (productos.Any(p => p.Nombre.Equals(dto.Nombre, StringComparison.OrdinalIgnoreCase)))
+            {
+                throw new InvalidOperationException("Ya existe un producto con ese nombre.");
+            }
+
+            if (!await _categoriaRepository.ExistsAsync(dto.CategoriaId))
+            {
+                throw new InvalidOperationException("La categoría especificada no existe.");
+            }
+
+            if (!await _marcaRepository.ExistsAsync(dto.MarcaId))
+            {
+                throw new InvalidOperationException("La marca especificada no existe.");
+            }
+
+            var producto = _mapper.Map<Producto>(dto);
+            var productoCreado = await _repository.AddAsync(producto);
+            return _mapper.Map<ProductoDTO>(productoCreado);
         }
 
-        public Task<bool> DeleteProductoAsync(int id)
+        public async Task<bool> DeleteProductoAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _repository.DeleteAsync(id);
         }
 
-        public Task<IEnumerable<ProductoDTO>> GetAllProductosAsync()
+        public async Task<IEnumerable<ProductoDTO>> GetAllProductosAsync()
         {
-            throw new NotImplementedException();
+            var productos = await _repository.GetAllAsync();
+            if (productos == null || !productos.Any())
+            {
+                return Enumerable.Empty<ProductoDTO>();
+            }
+            return _mapper.Map<IEnumerable<ProductoDTO>>(productos);
         }
 
-        public Task<ProductoDTO> GetProductoByIdAsync(int id)
+        public async Task<ProductoDTO> GetProductoByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var producto = await _repository.GetByIdAsync(id);
+            return producto == null ? throw new KeyNotFoundException("Producto no encontrado.") : _mapper.Map<ProductoDTO>(producto);
         }
 
-        public Task<ProductoDTO> UpdateProductoAsync(int id, CrearProductoDTO dto)
+        public async Task<ProductoDTO> UpdateProductoAsync(int id, CrearProductoDTO dto)
         {
-            throw new NotImplementedException();
+            var productoExistente = await _repository.GetByIdAsync(id);
+            if (productoExistente == null)
+                throw new KeyNotFoundException("Producto no encontrado.");
+
+            var productos = await _repository.GetAllAsync();
+            if (productos.Any(p => p.Nombre.Equals(dto.Nombre, StringComparison.OrdinalIgnoreCase) && p.Id != id))
+            {
+                throw new InvalidOperationException("Ya existe un producto con ese nombre.");
+            }
+
+            if (!await _categoriaRepository.ExistsAsync(dto.CategoriaId))
+                throw new InvalidOperationException("La categoría especificada no existe.");
+
+            if (!await _marcaRepository.ExistsAsync(dto.MarcaId))
+                throw new InvalidOperationException("La marca especificada no existe.");
+
+             _mapper.Map(dto, productoExistente);
+
+            var productoActualizado = await _repository.UpdateAsync(productoExistente);
+            return _mapper.Map<ProductoDTO>(productoActualizado);
         }
     }
 }

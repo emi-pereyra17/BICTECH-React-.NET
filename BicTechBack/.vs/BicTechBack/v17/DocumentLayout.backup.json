@@ -5,6 +5,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{8A177184-3480-40F3-9E3D-9394DD6F4EAA}|BicTechBack\\BicTechBack.csproj|c:\\users\\emi\\desktop\\guardar\\.net proyectos\\repos\\bictech\\bictechback\\bictechback\\src\\infrastructure\\services\\productoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8A177184-3480-40F3-9E3D-9394DD6F4EAA}|BicTechBack\\BicTechBack.csproj|solutionrelative:bictechback\\src\\infrastructure\\services\\productoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A177184-3480-40F3-9E3D-9394DD6F4EAA}|BicTechBack\\BicTechBack.csproj|c:\\users\\emi\\desktop\\guardar\\.net proyectos\\repos\\bictech\\bictechback\\bictechback\\src\\core\\mappings\\productoprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8A177184-3480-40F3-9E3D-9394DD6F4EAA}|BicTechBack\\BicTechBack.csproj|solutionrelative:bictechback\\src\\core\\mappings\\productoprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,13 +30,26 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ProductoProfile.cs",
+              "DocumentMoniker": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack\\src\\Core\\Mappings\\ProductoProfile.cs",
+              "RelativeDocumentMoniker": "BicTechBack\\src\\Core\\Mappings\\ProductoProfile.cs",
+              "ToolTip": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack\\src\\Core\\Mappings\\ProductoProfile.cs",
+              "RelativeToolTip": "BicTechBack\\src\\Core\\Mappings\\ProductoProfile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-08T23:46:34.399Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "ProductoService.cs",
               "DocumentMoniker": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack\\src\\Infrastructure\\Services\\ProductoService.cs",
               "RelativeDocumentMoniker": "BicTechBack\\src\\Infrastructure\\Services\\ProductoService.cs",
               "ToolTip": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack\\src\\Infrastructure\\Services\\ProductoService.cs",
               "RelativeToolTip": "BicTechBack\\src\\Infrastructure\\Services\\ProductoService.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABAAAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwBQAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-08T21:46:54.048Z",
               "EditorCaption": ""

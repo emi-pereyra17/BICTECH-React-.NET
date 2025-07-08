@@ -8,6 +8,7 @@ namespace BicTechBack.src.Core.Interfaces
         Task<Categoria?> GetByIdAsync(int id);
         Task<Categoria> AddAsync(Categoria categoria);
         Task<Categoria> UpdateAsync(Categoria categoria);
+        Task<bool> ExistsAsync(int id);
         Task<bool> DeleteAsync(int id);
     }
 }

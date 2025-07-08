@@ -8,6 +8,7 @@ namespace BicTechBack.src.Core.Interfaces
         Task<Marca?> GetByIdAsync(int id);
         Task<Marca> AddAsync(Marca marca);
         Task<Marca> UpdateAsync(Marca marca);
+        Task<bool> ExistsAsync(int id);
         Task<bool> DeleteAsync(int id);
     }
 }
