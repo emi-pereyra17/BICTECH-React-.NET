@@ -12,5 +12,9 @@
         public Marca Marca { get; set; }
         public int Stock { get; set; }
         public string ImagenUrl { get; set; }
+
+        public ICollection<CarritoDetalle> CarritosDetalles { get; set; }
+
+        public ICollection<PedidoDetalle> PedidosDetalles { get; set; }
     }
 }

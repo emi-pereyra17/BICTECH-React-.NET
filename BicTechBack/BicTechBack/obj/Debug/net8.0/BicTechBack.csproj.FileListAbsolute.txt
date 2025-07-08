@@ -158,12 +158,6 @@ C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBac
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\staticwebassets\msbuild.BicTechBack.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\staticwebassets\msbuild.BicTechBack.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
-C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\staticwebassets\msbuild.build.BicTechBack.props
-C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.BicTechBack.props
-C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.BicTechBack.props
-C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\BicTechB.0EE898CD.Up2Date
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\BicTechBack.dll
@@ -171,3 +165,10 @@ C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBac
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\BicTechBack.pdb
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\BicTechBack.genruntimeconfig.cache
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\ref\BicTechBack.dll
+C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\rjimswa.dswa.cache.json
+C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
+C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
+C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\staticwebassets.build.json.cache
+C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

@@ -40,7 +40,7 @@ namespace BicTechBack.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Carritos");
+                    b.ToTable("Carritos", (string)null);
                 });
 
             modelBuilder.Entity("BicTechBack.src.Core.Entities.CarritoDetalle", b =>
@@ -66,7 +66,7 @@ namespace BicTechBack.Migrations
 
                     b.HasIndex("ProductoId");
 
-                    b.ToTable("CarritosDetalles");
+                    b.ToTable("CarritosDetalles", (string)null);
                 });
 
             modelBuilder.Entity("BicTechBack.src.Core.Entities.Categoria", b =>
@@ -83,7 +83,7 @@ namespace BicTechBack.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categorias");
+                    b.ToTable("Categorias", (string)null);
                 });
 
             modelBuilder.Entity("BicTechBack.src.Core.Entities.CategoriaMarca", b =>
@@ -106,7 +106,7 @@ namespace BicTechBack.Migrations
 
                     b.HasIndex("MarcaId");
 
-                    b.ToTable("CategoriasMarcas");
+                    b.ToTable("CategoriasMarcas", (string)null);
                 });
 
             modelBuilder.Entity("BicTechBack.src.Core.Entities.Marca", b =>
@@ -123,7 +123,7 @@ namespace BicTechBack.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Marcas");
+                    b.ToTable("Marcas", (string)null);
                 });
 
             modelBuilder.Entity("BicTechBack.src.Core.Entities.Pedido", b =>
@@ -154,7 +154,7 @@ namespace BicTechBack.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Pedidos");
+                    b.ToTable("Pedidos", (string)null);
                 });
 
             modelBuilder.Entity("BicTechBack.src.Core.Entities.PedidoDetalle", b =>
@@ -186,7 +186,7 @@ namespace BicTechBack.Migrations
 
                     b.HasIndex("ProductoId");
 
-                    b.ToTable("PedidosDetalles");
+                    b.ToTable("PedidosDetalles", (string)null);
                 });
 
             modelBuilder.Entity("BicTechBack.src.Core.Entities.Producto", b =>
@@ -227,7 +227,7 @@ namespace BicTechBack.Migrations
 
                     b.HasIndex("MarcaId");
 
-                    b.ToTable("Productos");
+                    b.ToTable("Productos", (string)null);
                 });
 
             modelBuilder.Entity("BicTechBack.src.Core.Entities.Usuario", b =>
@@ -255,13 +255,13 @@ namespace BicTechBack.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Usuarios");
+                    b.ToTable("Usuarios", (string)null);
                 });
 
             modelBuilder.Entity("BicTechBack.src.Core.Entities.Carrito", b =>
                 {
                     b.HasOne("BicTechBack.src.Core.Entities.Usuario", "Usuario")
-                        .WithMany()
+                        .WithMany("Carritos")
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -272,13 +272,13 @@ namespace BicTechBack.Migrations
             modelBuilder.Entity("BicTechBack.src.Core.Entities.CarritoDetalle", b =>
                 {
                     b.HasOne("BicTechBack.src.Core.Entities.Carrito", "Carrito")
-                        .WithMany()
+                        .WithMany("CarritosDetalles")
                         .HasForeignKey("CarritoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("BicTechBack.src.Core.Entities.Producto", "Producto")
-                        .WithMany()
+                        .WithMany("CarritosDetalles")
                         .HasForeignKey("ProductoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -291,13 +291,13 @@ namespace BicTechBack.Migrations
             modelBuilder.Entity("BicTechBack.src.Core.Entities.CategoriaMarca", b =>
                 {
                     b.HasOne("BicTechBack.src.Core.Entities.Categoria", "Categoria")
-                        .WithMany()
+                        .WithMany("CategoriasMarcas")
                         .HasForeignKey("CategoriaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("BicTechBack.src.Core.Entities.Marca", "Marca")
-                        .WithMany()
+                        .WithMany("CategoriasMarcas")
                         .HasForeignKey("MarcaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -310,7 +310,7 @@ namespace BicTechBack.Migrations
             modelBuilder.Entity("BicTechBack.src.Core.Entities.Pedido", b =>
                 {
                     b.HasOne("BicTechBack.src.Core.Entities.Usuario", "Usuario")
-                        .WithMany()
+                        .WithMany("Pedidos")
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -321,13 +321,13 @@ namespace BicTechBack.Migrations
             modelBuilder.Entity("BicTechBack.src.Core.Entities.PedidoDetalle", b =>
                 {
                     b.HasOne("BicTechBack.src.Core.Entities.Pedido", "Pedido")
-                        .WithMany()
+                        .WithMany("PedidosDetalles")
                         .HasForeignKey("PedidoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("BicTechBack.src.Core.Entities.Producto", "Producto")
-                        .WithMany()
+                        .WithMany("PedidosDetalles")
                         .HasForeignKey("ProductoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -340,13 +340,13 @@ namespace BicTechBack.Migrations
             modelBuilder.Entity("BicTechBack.src.Core.Entities.Producto", b =>
                 {
                     b.HasOne("BicTechBack.src.Core.Entities.Categoria", "Categoria")
-                        .WithMany()
+                        .WithMany("Productos")
                         .HasForeignKey("CategoriaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("BicTechBack.src.Core.Entities.Marca", "Marca")
-                        .WithMany()
+                        .WithMany("Productos")
                         .HasForeignKey("MarcaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -354,6 +354,44 @@ namespace BicTechBack.Migrations
                     b.Navigation("Categoria");
 
                     b.Navigation("Marca");
+                });
+
+            modelBuilder.Entity("BicTechBack.src.Core.Entities.Carrito", b =>
+                {
+                    b.Navigation("CarritosDetalles");
+                });
+
+            modelBuilder.Entity("BicTechBack.src.Core.Entities.Categoria", b =>
+                {
+                    b.Navigation("CategoriasMarcas");
+
+                    b.Navigation("Productos");
+                });
+
+            modelBuilder.Entity("BicTechBack.src.Core.Entities.Marca", b =>
+                {
+                    b.Navigation("CategoriasMarcas");
+
+                    b.Navigation("Productos");
+                });
+
+            modelBuilder.Entity("BicTechBack.src.Core.Entities.Pedido", b =>
+                {
+                    b.Navigation("PedidosDetalles");
+                });
+
+            modelBuilder.Entity("BicTechBack.src.Core.Entities.Producto", b =>
+                {
+                    b.Navigation("CarritosDetalles");
+
+                    b.Navigation("PedidosDetalles");
+                });
+
+            modelBuilder.Entity("BicTechBack.src.Core.Entities.Usuario", b =>
+                {
+                    b.Navigation("Carritos");
+
+                    b.Navigation("Pedidos");
                 });
 #pragma warning restore 612, 618
         }

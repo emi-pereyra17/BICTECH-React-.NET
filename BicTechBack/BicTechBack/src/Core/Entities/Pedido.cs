@@ -10,6 +10,8 @@
         public EstadoPedido Estado { get; set; }
         public string DireccionEnvio { get; set; }
 
+        public ICollection<PedidoDetalle> PedidosDetalles { get; set; }
+
     }
 
     public enum EstadoPedido
