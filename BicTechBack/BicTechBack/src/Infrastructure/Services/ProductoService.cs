@@ -81,7 +81,7 @@ namespace BicTechBack.src.Infrastructure.Services
             if (!await _marcaRepository.ExistsAsync(dto.MarcaId))
                 throw new InvalidOperationException("La marca especificada no existe.");
 
-             _mapper.Map(dto, productoExistente);
+             _mapper.Map(dto, productoExistente); //Esta línea actualiza las propiedades del producto existente con los valores del DTO
 
             var productoActualizado = await _repository.UpdateAsync(productoExistente);
             return _mapper.Map<ProductoDTO>(productoActualizado);
