@@ -40,6 +40,14 @@ namespace BicTechBack.src.Infrastructure.Repositories
                 .ToListAsync();
         }
 
+        public async Task<Usuario?> GetByEmailAsync(string email)
+        {
+            return await _context.Usuarios
+                .Include(u => u.Pedidos)
+                .Include(u => u.Carritos)
+                .FirstOrDefaultAsync(u => u.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
+        }
+
         public async Task<Usuario?> GetByIdAsync(int id)
         {
             return await _context.Usuarios

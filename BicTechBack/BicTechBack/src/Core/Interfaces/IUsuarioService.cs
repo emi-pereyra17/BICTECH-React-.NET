@@ -7,7 +7,7 @@ namespace BicTechBack.src.Core.Interfaces
         Task<IEnumerable<UsuarioDTO>> GetAllUsuariosAsync();
         Task<UsuarioDTO> GetUsuarioByIdAsync(int id);
         Task<UsuarioDTO> CreateUsuarioAsync(CrearUsuarioDTO dto, string rol);
-        Task<UsuarioDTO> UpdateUsuarioAsync(CrearUsuarioDTO dto);
+        Task<UsuarioDTO> UpdateUsuarioAsync(CrearUsuarioDTO dto, int id);
         Task<bool> DeleteUsuarioAsync(int id);
     }
 }
