@@ -12,7 +12,8 @@ namespace BicTechBack.src.Core.Mappings
 
             CreateMap<Carrito, CarritoDTO>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
-                .ForMember(dest => dest.UsuarioId, opt => opt.MapFrom(src => src.UsuarioId));
+                .ForMember(dest => dest.UsuarioId, opt => opt.MapFrom(src => src.UsuarioId))
+                .ForMember(dest => dest.Productos, opt => opt.MapFrom(src => src.CarritosDetalles));
         }
     }
 }

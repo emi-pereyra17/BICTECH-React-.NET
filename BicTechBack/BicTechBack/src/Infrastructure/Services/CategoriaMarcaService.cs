@@ -61,6 +61,30 @@ namespace BicTechBack.src.Infrastructure.Services
             return _mapper.Map<IEnumerable<CategoriaMarcaDTO>>(cms);
         }
 
+        public async Task<IEnumerable<MarcaDTO>> GetMarcasPorCategoriaAsync(int categoriaId)
+        {
+            var categoria = await _categoriaRepository.GetByIdAsync(categoriaId);
+            if (categoria == null)
+                throw new KeyNotFoundException("Categoria no encontrada.");
+
+            var relaciones = await _repository.GetByCategoriaIdAsync(categoriaId);
+            var marcas = relaciones.Select(r => r.Marca).Distinct().ToList();
+
+            return _mapper.Map<IEnumerable<MarcaDTO>>(marcas);
+        }
+
+        public async Task<IEnumerable<CategoriaDTO>> GetCategoriasPorMarcaAsync(int marcaId)
+        {
+            var marca = await _marcaRepository.GetByIdAsync(marcaId);
+            if (marca == null)
+                throw new KeyNotFoundException("Marca no encontrada.");
+
+            var relaciones = await _repository.GetByMarcaIdAsync(marcaId);
+            var categorias = relaciones.Select(r => r.Categoria).Distinct().ToList();
+
+            return _mapper.Map<IEnumerable<CategoriaDTO>>(categorias);
+        }
+
         public async Task<IEnumerable<CategoriaMarcaDTO>> GetCMByCategoriaIdAsync(int categoriaId)
         {
             var categoria = await _categoriaRepository.GetByIdAsync(categoriaId);

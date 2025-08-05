@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BicTechBack.src.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("productos")]
     public class ProductoController : ControllerBase
     {
         private readonly IProductoService _productoService;
@@ -16,62 +16,81 @@ namespace BicTechBack.src.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductoDTO>>> GetAll()
+        public async Task<ActionResult> GetAll()
         {
-            var productos = await _productoService.GetAllProductosAsync();
-            return Ok(productos);
+            try
+            {
+                var productos = await _productoService.GetAllProductosAsync();
+                return Ok(new { message = "Lista de productos", productos });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Error al consultar los productos", error = ex.Message });
+            }
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<ProductoDTO>> GetById(int id)
+        public async Task<ActionResult> GetById(int id)
         {
             try
             {
                 var producto = await _productoService.GetProductoByIdAsync(id);
-                return Ok(producto);
+                return Ok(new { message = "Producto encontrado", producto });
             }
-            catch (KeyNotFoundException ex)
+            catch (KeyNotFoundException)
             {
-                return NotFound(new { message = ex.Message });
+                return NotFound(new { message = "Producto no encontrado" });
             }
-            
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Error al consultar el producto", error = ex.Message });
+            }
         }
 
         [HttpPost]
-        public async Task<ActionResult<ProductoDTO>> Create([FromBody] CrearProductoDTO dto)
+        public async Task<ActionResult> Create([FromBody] CrearProductoDTO dto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(new { message = "Faltan datos requeridos" });
+
             try
             {
                 var productoCreado = await _productoService.CreateProductoAsync(dto);
-                return CreatedAtAction(nameof(GetById), new { id = productoCreado.Id }, productoCreado);
+                return StatusCode(201, new { message = "Producto creado", producto = productoCreado });
             }
             catch (InvalidOperationException ex)
             {
                 return BadRequest(new { message = ex.Message });
-            }       
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Error al crear el producto", error = ex.Message });
+            }
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<ProductoDTO>> Update(int id, [FromBody] CrearProductoDTO dto)
+        public async Task<ActionResult> Update(int id, [FromBody] CrearProductoDTO dto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(new { message = "Faltan datos requeridos" });
+
             try
             {
                 var productoActualizado = await _productoService.UpdateProductoAsync(id, dto);
-                if (productoActualizado == null)
-                {
-                    return NotFound();
-                }
-                return Ok(productoActualizado);
+                return Ok(new { message = "Producto actualizado", producto = productoActualizado });
             }
-            catch (KeyNotFoundException ex)
+            catch (KeyNotFoundException)
             {
-                return NotFound(new { message = ex.Message });
+                return NotFound(new { message = "Producto no encontrado" });
             }
             catch (InvalidOperationException ex)
             {
                 return BadRequest(new { message = ex.Message });
             }
-            
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Error al actualizar el producto", error = ex.Message });
+            }
         }
 
         [HttpDelete("{id:int}")]
@@ -82,16 +101,18 @@ namespace BicTechBack.src.API.Controllers
                 var eliminado = await _productoService.DeleteProductoAsync(id);
                 if (!eliminado)
                 {
-                    return NotFound();
+                    return NotFound(new { message = "Producto no encontrado" });
                 }
-                return NoContent();
+                return Ok(new { message = "Producto eliminado" });
             }
-            catch (KeyNotFoundException ex)
+            catch (KeyNotFoundException)
             {
-                return NotFound(new { message = ex.Message });
+                return NotFound(new { message = "Producto no encontrado" });
             }
-            
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Error al eliminar el producto", error = ex.Message });
+            }
         }
-
     }
 }
