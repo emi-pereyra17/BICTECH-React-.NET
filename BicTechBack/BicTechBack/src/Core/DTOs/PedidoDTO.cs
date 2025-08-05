@@ -8,6 +8,6 @@
         public decimal Total { get; set; }
         public string Estado { get; set; }
         public string DireccionEnvio { get; set; }
-
+        public List<PedidoDetalleDTO> Productos { get; set; }
     }
 }
