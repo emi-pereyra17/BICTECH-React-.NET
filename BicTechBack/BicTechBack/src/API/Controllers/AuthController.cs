@@ -1,5 +1,6 @@
 ﻿using BicTechBack.src.Core.DTOs;
 using BicTechBack.src.Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BicTechBack.src.API.Controllers
@@ -16,6 +17,7 @@ namespace BicTechBack.src.API.Controllers
         }
 
         [HttpPost("register")]
+        [AllowAnonymous]
         public async Task<ActionResult> Register([FromBody] RegisterUsuarioDTO dto)
         {
             if (!ModelState.IsValid)
@@ -37,6 +39,7 @@ namespace BicTechBack.src.API.Controllers
         }
 
         [HttpPost("login")]
+        [AllowAnonymous]
         public async Task<ActionResult> Login([FromBody] LoginUsuarioDTO dto)
         {
             if (!ModelState.IsValid)
@@ -58,10 +61,18 @@ namespace BicTechBack.src.API.Controllers
         }
 
         [HttpPut("password/{id:int}")]
+        [Authorize(Roles = "Admin,User")]
         public async Task<ActionResult> UpdatePassword(int id, [FromBody] string password)
         {
             if (string.IsNullOrWhiteSpace(password))
                 return BadRequest(new { message = "Contraseña inválida" });
+
+            var isAdmin = User.IsInRole("Admin");
+            var userIdClaim = int.Parse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value);
+            if (!isAdmin && id != userIdClaim)
+            {
+                return Forbid();
+            }
 
             try
             {

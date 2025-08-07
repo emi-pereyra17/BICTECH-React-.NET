@@ -56,6 +56,21 @@ namespace BicTechBack.src.Infrastructure.Services
             return _mapper.Map<MarcaDTO>(marca);
         }
 
+        public async Task<(IEnumerable<MarcaDTO> Marcas, int Total)> GetMarcasAsync(int page, int pageSize, string? filtro)
+        {
+            var marcas = await _repository.GetAllAsync();
+
+            var total = marcas.Count();
+
+            var marcasPaginados = marcas
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize);
+
+            var marcasDto = _mapper.Map<IEnumerable<MarcaDTO>>(marcasPaginados);
+
+            return (marcasDto, total);
+        }
+
         public async Task<MarcaDTO> UpdateMarcaAsync(int id, CrearMarcaDTO dto)
         {
             var marcaExistente = await _repository.GetByIdAsync(id);

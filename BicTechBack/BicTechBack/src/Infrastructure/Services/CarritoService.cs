@@ -95,6 +95,21 @@ namespace BicTechBack.src.Infrastructure.Services
             return _mapper.Map<CarritoDTO>(carrito);
         }
 
+        public async Task<(IEnumerable<CarritoDTO> Carritos, int Total)> GetCarritosAsync(int page, int pageSize, string? filtro)
+        {
+            var carritos = await _repository.GetAllAsync();
+
+            var total = carritos.Count();
+
+            var carritosPaginados = carritos
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize);
+
+            var carritosDto = _mapper.Map<IEnumerable<CarritoDTO>>(carritosPaginados);
+
+            return (carritosDto, total);
+        }
+
         public async Task<CarritoDTO> UpdateAmountProductoAsync(int usuarioId, int productoId, int cantidad)
         {
             var carrito = await _repository.GetByUsuarioIdAsync(usuarioId);

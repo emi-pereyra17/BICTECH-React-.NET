@@ -63,6 +63,21 @@ namespace BicTechBack.src.Infrastructure.Services
             return producto == null ? throw new KeyNotFoundException("Producto no encontrado.") : _mapper.Map<ProductoDTO>(producto);
         }
 
+        public async Task<(IEnumerable<ProductoDTO> Productos, int Total)> GetProductosAsync(int page, int pageSize, string? filtro)
+        {
+            var productos = await _repository.GetAllAsync();
+
+            var total = productos.Count();
+
+            var productosPaginados = productos
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize);
+
+            var productosDTO = _mapper.Map<IEnumerable<ProductoDTO>>(productosPaginados);
+
+            return (productosDTO, total);
+        }
+
         public async Task<ProductoDTO> UpdateProductoAsync(int id, CrearProductoDTO dto)
         {
             var productoExistente = await _repository.GetByIdAsync(id);

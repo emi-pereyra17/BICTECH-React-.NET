@@ -1,5 +1,7 @@
 ﻿using BicTechBack.src.Core.DTOs;
 using BicTechBack.src.Core.Interfaces;
+using BicTechBack.src.Infrastructure.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BicTechBack.src.API.Controllers
@@ -16,6 +18,7 @@ namespace BicTechBack.src.API.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult> GetAll()
         {
             try
@@ -29,7 +32,30 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        [HttpGet("paginado")]
+        public async Task<ActionResult> GetPaged([FromQuery] int page = 1, [FromQuery] int pageSize = 10,
+        [FromQuery] string? filtro = null)
+        {
+            try
+            {
+                var (marcas, total) = await _marcaService.GetMarcasAsync(page, pageSize, filtro);
+                return Ok(new
+                {
+                    message = "Lista paginada de marcas",
+                    total,
+                    page,
+                    pageSize,
+                    marcas
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Error al consultar las marcas", error = ex.Message });
+            }
+        }
+
         [HttpGet("{id:int}")]
+        [AllowAnonymous]
         public async Task<ActionResult> GetById(int id)
         {
             try
@@ -48,6 +74,7 @@ namespace BicTechBack.src.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create([FromBody] CrearMarcaDTO dto)
         {
             if (!ModelState.IsValid || string.IsNullOrWhiteSpace(dto.Nombre))
@@ -69,6 +96,7 @@ namespace BicTechBack.src.API.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Update(int id, [FromBody] CrearMarcaDTO dto)
         {
             if (!ModelState.IsValid || string.IsNullOrWhiteSpace(dto.Nombre))
@@ -94,6 +122,7 @@ namespace BicTechBack.src.API.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int id)
         {
             try

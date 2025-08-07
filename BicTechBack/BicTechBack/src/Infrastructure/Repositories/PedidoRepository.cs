@@ -39,6 +39,14 @@ namespace BicTechBack.src.Infrastructure.Repositories
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<Pedido>> GetByClienteIdAsync(int clienteId)
+        {
+            return await _context.Pedidos
+                .Where(p => p.UsuarioId == clienteId)
+                .Include(p => p.Usuario)
+                .ToListAsync();
+        }
+
         public async Task<Pedido?> GetByIdAsync(int id)
         {
             return await _context.Pedidos

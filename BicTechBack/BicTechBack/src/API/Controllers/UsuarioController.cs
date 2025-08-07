@@ -1,11 +1,13 @@
 ﻿using BicTechBack.src.Core.DTOs;
 using BicTechBack.src.Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BicTechBack.src.API.Controllers
 {
     [ApiController]
     [Route("usuarios")]
+    [Authorize(Roles = "Admin")]
     public class UsuarioController : ControllerBase
     {
         private readonly IUsuarioService _usuarioService;
@@ -22,6 +24,28 @@ namespace BicTechBack.src.API.Controllers
             {
                 var usuarios = await _usuarioService.GetAllUsuariosAsync();
                 return Ok(new { message = "Lista de usuarios", usuarios });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Error al consultar los usuarios", error = ex.Message });
+            }
+        }
+
+        [HttpGet("paginado")]
+        public async Task<ActionResult> GetPaged([FromQuery] int page = 1,[FromQuery] int pageSize = 10,
+        [FromQuery] string? filtro = null)
+        {
+            try
+            {
+                var (usuarios, total) = await _usuarioService.GetUsuariosAsync(page, pageSize, filtro);
+                return Ok(new
+                {
+                    message = "Lista paginada de usuarios",
+                    total,
+                    page,
+                    pageSize,
+                    usuarios
+                });
             }
             catch (Exception ex)
             {

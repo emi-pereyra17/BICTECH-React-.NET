@@ -70,6 +70,21 @@ namespace BicTechBack.src.Infrastructure.Services
             return _mapper.Map<UsuarioDTO>(usuario);
         }
 
+        public async Task<(IEnumerable<UsuarioDTO> Usuarios, int Total)> GetUsuariosAsync(int page, int pageSize, string? filtro)
+        {
+            var usuarios = await _repository.GetAllAsync();
+
+            var total = usuarios.Count();
+
+            var usuariosPaginados = usuarios
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize);
+
+            var usuariosDto = _mapper.Map<IEnumerable<UsuarioDTO>>(usuariosPaginados);
+
+            return (usuariosDto, total);
+        }
+
         public async Task<UsuarioDTO> UpdateUsuarioAsync(CrearUsuarioDTO dto, int id)
         {
             var usuarioExistente = await _repository.GetByIdAsync(id);

@@ -57,6 +57,21 @@ namespace BicTechBack.src.Infrastructure.Services
             return _mapper.Map<CategoriaDTO>(categoria);
         }
 
+        public async Task<(IEnumerable<CategoriaDTO> Categorias, int Total)> GetCategoriasAsync(int page, int pageSize, string? filtro)
+        {
+            var categorias = await _repository.GetAllAsync();
+
+            var total = categorias.Count();
+
+            var categoriasPaginadas = categorias
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize);
+
+            var categoriasDto = _mapper.Map<IEnumerable<CategoriaDTO>>(categoriasPaginadas);
+
+            return (categoriasDto, total);
+        }
+
         public async Task<CategoriaDTO> UpdateCategoriaAsync(int id, CrearCategoriaDTO dto)
         {
             var categoriaExistente = await _repository.GetByIdAsync(id);

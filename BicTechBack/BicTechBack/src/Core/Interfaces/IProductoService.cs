@@ -9,5 +9,6 @@ namespace BicTechBack.src.Core.Interfaces
         Task<ProductoDTO> CreateProductoAsync(CrearProductoDTO dto);
         Task<ProductoDTO> UpdateProductoAsync(int id, CrearProductoDTO dto);
         Task<bool> DeleteProductoAsync(int id);
+        Task<(IEnumerable<ProductoDTO> Productos, int Total)> GetProductosAsync(int page, int pageSize, string? filtro);
     }
 }

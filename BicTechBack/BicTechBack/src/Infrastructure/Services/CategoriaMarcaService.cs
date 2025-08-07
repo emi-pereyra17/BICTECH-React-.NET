@@ -118,5 +118,20 @@ namespace BicTechBack.src.Infrastructure.Services
 
             return _mapper.Map<IEnumerable<CategoriaMarcaDTO>>(cms);
         }
+
+        public async Task<(IEnumerable<CategoriaMarcaDTO> CategoriasMarcas, int Total)> GetCMAsync(int page, int pageSize, string? filtro)
+        {
+            var cms = await _repository.GetAllAsync();
+
+            var total = cms.Count();
+
+            var cmsPaginados = cms
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize);
+
+            var cmsDto = _mapper.Map<IEnumerable<CategoriaMarcaDTO>>(cmsPaginados);
+
+            return (cmsDto, total);
+        }
     }
 }

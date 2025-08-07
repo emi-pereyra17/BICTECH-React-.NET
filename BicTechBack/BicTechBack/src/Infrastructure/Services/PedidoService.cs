@@ -167,5 +167,30 @@ namespace BicTechBack.src.Infrastructure.Services
             var pedidoActualizado = await _repository.UpdateAsync(pedidoExistente);
             return _mapper.Map<PedidoDTO>(pedidoActualizado);
         }
+
+        public async Task<IEnumerable<PedidoDTO>> GetPedidosByUsuarioIdAsync(int usuarioId)
+        {
+            var pedidos = await _repository.GetByClienteIdAsync(usuarioId);
+            if (pedidos == null || !pedidos.Any())
+            {
+                return Enumerable.Empty<PedidoDTO>();
+            }
+            return _mapper.Map<IEnumerable<PedidoDTO>>(pedidos);
+        }
+
+        public async Task<(IEnumerable<PedidoDTO> Pedidos, int Total)> GetPedidosAsync(int page, int pageSize, string? filtro)
+        {
+            var pedidos = await _repository.GetAllAsync();
+
+            var total = pedidos.Count();
+
+            var pedidosPaginados = pedidos
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize);
+
+            var pedidosDto = _mapper.Map<IEnumerable<PedidoDTO>>(pedidosPaginados);
+
+            return (pedidosDto, total);
+        }
     }
 }

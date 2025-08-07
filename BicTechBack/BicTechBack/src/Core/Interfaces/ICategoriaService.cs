@@ -9,5 +9,6 @@ namespace BicTechBack.src.Core.Interfaces
         Task<CategoriaDTO> CreateCategoriaAsync(CrearCategoriaDTO dto);
         Task<CategoriaDTO> UpdateCategoriaAsync(int id, CrearCategoriaDTO dto);
         Task<bool> DeleteCategoriaAsync(int id);
+        Task<(IEnumerable<CategoriaDTO> Categorias, int Total)> GetCategoriasAsync(int page, int pageSize, string? filtro);
     }
 }

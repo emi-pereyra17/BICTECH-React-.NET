@@ -1,5 +1,7 @@
 ﻿using BicTechBack.src.Core.DTOs;
 using BicTechBack.src.Core.Interfaces;
+using BicTechBack.src.Infrastructure.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BicTechBack.src.API.Controllers
@@ -16,15 +18,45 @@ namespace BicTechBack.src.API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAll()
         {
             var carritos = await _carritoService.GetAllCarritosAsync();
             return Ok(carritos);
         }
 
+        [HttpGet("paginado")]
+        public async Task<ActionResult> GetPaged([FromQuery] int page = 1, [FromQuery] int pageSize = 10,
+        [FromQuery] string? filtro = null)
+        {
+            try
+            {
+                var (carritos, total) = await _carritoService.GetCarritosAsync(page, pageSize, filtro);
+                return Ok(new
+                {
+                    message = "Lista paginada de carritos",
+                    total,
+                    page,
+                    pageSize,
+                    carritos
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Error al consultar los carritos", error = ex.Message });
+            }
+        }
+
         [HttpGet("{usuarioId:int}")]
+        [Authorize(Roles = "User, Admin")]
         public async Task<IActionResult> GetByUsuarioId(int usuarioId)
         {
+            var isAdmin = User.IsInRole("Admin");
+            var userIdClaim = int.Parse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value);
+            if (!isAdmin && usuarioId != userIdClaim)
+            {
+                return Forbid();
+            }
             var carrito = await _carritoService.GetCarritoByUsuarioIdAsync(usuarioId);
             if (carrito == null || carrito.Id == 0)
             {
@@ -34,8 +66,15 @@ namespace BicTechBack.src.API.Controllers
         }
 
         [HttpPut("{usuarioId:int}/productos/{productoId:int}")]
+        [Authorize(Roles = "User, Admin")]
         public async Task<IActionResult> UpdateAmountProductoInCarrito(int usuarioId, int productoId, [FromQuery] int cantidad)
         {
+            var isAdmin = User.IsInRole("Admin");
+            var userIdClaim = int.Parse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value);
+            if (!isAdmin && usuarioId != userIdClaim)
+            {
+                return Forbid();
+            }
             if (cantidad <= 0)
                 return BadRequest(new { message = "La cantidad debe ser mayor que cero." });
 
@@ -51,8 +90,15 @@ namespace BicTechBack.src.API.Controllers
         }
 
         [HttpPost("{usuarioId:int}/productos/{productoId:int}/add")]
+        [Authorize(Roles = "User, Admin")]
         public async Task<IActionResult> AddProductoToCarrito(int usuarioId, int productoId, [FromQuery] int cantidad)
         {
+            var isAdmin = User.IsInRole("Admin");
+            var userIdClaim = int.Parse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value);
+            if (!isAdmin && usuarioId != userIdClaim)
+            {
+                return Forbid();
+            }
             if (cantidad <= 0)
                 return BadRequest(new { message = "La cantidad debe ser mayor que cero." });
 
@@ -68,6 +114,7 @@ namespace BicTechBack.src.API.Controllers
         }
 
         [HttpDelete("{usuarioId:int}/productos/{productoId:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteProductoFromCarrito(int usuarioId, int productoId)
         {
             try
@@ -82,6 +129,7 @@ namespace BicTechBack.src.API.Controllers
         }
 
         [HttpDelete("{usuarioId:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ClearCarrito(int usuarioId)
         {
             try
