@@ -58,7 +58,7 @@ namespace BicTechBack.src.Infrastructure.Services
                 new Claim(JwtRegisteredClaimNames.Sub, usuario.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, usuario.Email),
                 new Claim("nombre", usuario.Nombre),
-                new Claim("rol", usuario.Rol.ToString())
+                new Claim(ClaimTypes.Role, usuario.Rol.ToString())
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
