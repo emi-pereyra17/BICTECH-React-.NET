@@ -172,3 +172,11 @@ C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBac
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\bin\Debug\net8.0\AutoMapper.dll
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll
+C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\bin\Debug\net8.0\Microsoft.Extensions.ObjectPool.dll
+C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\bin\Debug\net8.0\Microsoft.Extensions.WebEncoders.dll
+C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\bin\Debug\net8.0\System.Security.Cryptography.Xml.dll
+C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll

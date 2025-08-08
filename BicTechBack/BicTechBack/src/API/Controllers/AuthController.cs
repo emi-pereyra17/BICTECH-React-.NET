@@ -60,6 +60,15 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        [HttpPost("logout")]
+        [Authorize]
+        public async Task<ActionResult> Logout()
+        {
+            var userId = int.Parse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value);
+            await _authService.LogoutAsync(userId);
+            return Ok(new { message = "Sesión cerrada correctamente" });
+        }
+
         [HttpPut("password/{id:int}")]
         [Authorize(Roles = "Admin,User")]
         public async Task<ActionResult> UpdatePassword(int id, [FromBody] string password)
@@ -85,6 +94,21 @@ namespace BicTechBack.src.API.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, new { message = "Error al actualizar la contraseña", error = ex.Message });
+            }
+        }
+
+        [HttpPost("refresh")]
+        [AllowAnonymous]
+        public async Task<ActionResult> Refresh([FromBody] RefreshRequestDTO dto)
+        {
+            try
+            {
+                var result = await _authService.RefreshTokenAsync(dto.Token, dto.RefreshToken);
+                return Ok(result);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Unauthorized(new { message = ex.Message });
             }
         }
     }

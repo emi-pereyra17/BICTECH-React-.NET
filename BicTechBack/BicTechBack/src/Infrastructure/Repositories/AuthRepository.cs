@@ -33,6 +33,27 @@ namespace BicTechBack.src.Infrastructure.Repositories
                 .FirstOrDefaultAsync(u => u.Id == id);
         }
 
+        public async Task<Usuario?> GetUserByRefreshTokenAsync(string refreshToken)
+        {
+            return await _context.Usuarios
+                .FirstOrDefaultAsync(u =>
+                    u.RefreshToken == refreshToken &&
+                    u.RefreshTokenExpiryTime != null &&
+                    u.RefreshTokenExpiryTime > DateTime.UtcNow);
+        }
+
+        public async Task SaveRefreshTokenAsync(int id, string refreshToken, DateTime dateTime)
+        {
+            var usuario = await _context.Usuarios.FindAsync(id);
+            if (usuario != null)
+            {
+                usuario.RefreshToken = refreshToken;
+                usuario.RefreshTokenExpiryTime = dateTime;
+                _context.Usuarios.Update(usuario);
+                await _context.SaveChangesAsync();
+            }
+        }
+
         public async Task<bool> UpdatePasswordAsync(int id, string newPassword)
         {
             var usuario = await _context.Usuarios.FindAsync(id);

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace BicTechBack.src.Infrastructure.Services
@@ -30,49 +31,31 @@ namespace BicTechBack.src.Infrastructure.Services
         {
             var usuario = await _repository.GetByEmailAsync(dto.Email);
             if (usuario == null)
-            {
                 throw new InvalidOperationException("Credenciales inválidas.");
-            }
 
             var passwordVerificationResult = _passwordHasher.VerifyHashedPassword(usuario, usuario.Password, dto.Password);
             if (passwordVerificationResult == PasswordVerificationResult.Failed)
-            {
                 throw new InvalidOperationException("Credenciales inválidas.");
-            }
 
             var token = GenerateJwtToken(usuario);
+            var refreshToken = GenerateRefreshToken();
+
+            // Guarda el refreshToken en la base de datos asociado al usuario (implementa este método en tu repositorio)
+            await _repository.SaveRefreshTokenAsync(usuario.Id, refreshToken, DateTime.UtcNow.AddDays(7));
 
             return new LoginResultDTO
             {
                 Token = token,
+                RefreshToken = refreshToken,
                 UsuarioId = usuario.Id,
                 Nombre = usuario.Nombre,
                 Email = usuario.Email
             };
         }
 
-        private string GenerateJwtToken(Usuario usuario)
+        public async Task LogoutAsync(int userId)
         {
-            var claims = new[]
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, usuario.Id.ToString()),
-                new Claim(JwtRegisteredClaimNames.Email, usuario.Email),
-                new Claim("nombre", usuario.Nombre),
-                new Claim(ClaimTypes.Role, usuario.Rol.ToString())
-            };
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-            var token = new JwtSecurityToken(
-                issuer: _configuration["Jwt:Issuer"],
-                audience: _configuration["Jwt:Audience"],
-                claims: claims,
-                expires: DateTime.UtcNow.AddHours(2),
-                signingCredentials: creds
-                );
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            await _repository.SaveRefreshTokenAsync(userId, null, DateTime.MinValue);
         }
 
         public async Task<int> RegisterUserAsync(RegisterUsuarioDTO dto)
@@ -104,6 +87,59 @@ namespace BicTechBack.src.Infrastructure.Services
 
             var hashedPassword = _passwordHasher.HashPassword(usuario, newPassword);
             return await _repository.UpdatePasswordAsync(id, hashedPassword);
+        }
+
+        public async Task<LoginResultDTO> RefreshTokenAsync(string token, string refreshToken)
+        {
+            // Valida el refreshToken y su expiración (implementa este método en tu repositorio)
+            var usuario = await _repository.GetUserByRefreshTokenAsync(refreshToken);
+            if (usuario == null)
+                throw new InvalidOperationException("Refresh token inválido.");
+
+            // Opcional: verifica que el refreshToken no haya expirado
+
+            var newToken = GenerateJwtToken(usuario);
+            var newRefreshToken = GenerateRefreshToken();
+            await _repository.SaveRefreshTokenAsync(usuario.Id, newRefreshToken, DateTime.UtcNow.AddDays(7));
+
+            return new LoginResultDTO
+            {
+                Token = newToken,
+                RefreshToken = newRefreshToken,
+                UsuarioId = usuario.Id,
+                Nombre = usuario.Nombre,
+                Email = usuario.Email
+            };
+        }
+        private string GenerateJwtToken(Usuario usuario)
+        {
+            var claims = new[]
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, usuario.Id.ToString()),
+                new Claim(JwtRegisteredClaimNames.Email, usuario.Email),
+                new Claim("nombre", usuario.Nombre),
+                new Claim(ClaimTypes.Role, usuario.Rol.ToString())
+            };
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+                issuer: _configuration["Jwt:Issuer"],
+                audience: _configuration["Jwt:Audience"],
+                claims: claims,
+                expires: DateTime.UtcNow.AddHours(2),
+                signingCredentials: creds
+                );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+        private string GenerateRefreshToken()
+        {
+            var randomNumber = new byte[32];
+            using var rng = RandomNumberGenerator.Create();
+            rng.GetBytes(randomNumber);
+            return Convert.ToBase64String(randomNumber);
         }
     }
 }
