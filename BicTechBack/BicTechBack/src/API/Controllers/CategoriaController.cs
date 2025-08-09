@@ -7,12 +7,15 @@ using Microsoft.Extensions.Logging;
 
 namespace BicTechBack.src.API.Controllers
 {
+    /// <summary>
+    /// Controlador para la gestión de categorías de productos.
+    /// </summary>
     [ApiController]
     [Route("categorias")]
     public class CategoriaController : ControllerBase
     {
         private readonly ICategoriaService _categoriaService;
-        private readonly ILogger<CategoriaController> _logger; 
+        private readonly ILogger<CategoriaController> _logger;
 
         public CategoriaController(ICategoriaService categoriaService, ILogger<CategoriaController> logger)
         {
@@ -20,6 +23,10 @@ namespace BicTechBack.src.API.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Obtiene la lista de todas las categorías.
+        /// </summary>
+        /// <returns>Lista de categorías.</returns>
         [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult> GetAll()
@@ -38,6 +45,13 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtiene una lista paginada de categorías.
+        /// </summary>
+        /// <param name="page">Número de página (por defecto 1).</param>
+        /// <param name="pageSize">Cantidad de categorías por página (por defecto 10).</param>
+        /// <param name="filtro">Filtro opcional por nombre.</param>
+        /// <returns>Lista paginada de categorías y el total.</returns>
         [HttpGet("paginado")]
         public async Task<ActionResult> GetPaged([FromQuery] int page = 1, [FromQuery] int pageSize = 10,
         [FromQuery] string? filtro = null)
@@ -63,6 +77,11 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtiene una categoría por su identificador.
+        /// </summary>
+        /// <param name="id">Identificador de la categoría.</param>
+        /// <returns>Categoría encontrada o error si no existe.</returns>
         [HttpGet("{id:int}")]
         [AllowAnonymous]
         public async Task<ActionResult> GetById(int id)
@@ -86,6 +105,11 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Crea una nueva categoría.
+        /// </summary>
+        /// <param name="dto">Datos de la categoría a crear.</param>
+        /// <returns>Categoría creada.</returns>
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create([FromBody] CrearCategoriaDTO dto)
@@ -115,6 +139,12 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Actualiza una categoría existente.
+        /// </summary>
+        /// <param name="id">Identificador de la categoría a actualizar.</param>
+        /// <param name="dto">Datos nuevos de la categoría.</param>
+        /// <returns>Categoría actualizada o error si no existe.</returns>
         [HttpPut("{id:int}")]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Update(int id, [FromBody] CrearCategoriaDTO dto)
@@ -149,6 +179,11 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Elimina una categoría por su identificador.
+        /// </summary>
+        /// <param name="id">Identificador de la categoría a eliminar.</param>
+        /// <returns>Resultado de la operación.</returns>
         [HttpDelete("{id:int}")]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int id)

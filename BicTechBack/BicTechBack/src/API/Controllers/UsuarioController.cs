@@ -6,13 +6,17 @@ using Microsoft.Extensions.Logging;
 
 namespace BicTechBack.src.API.Controllers
 {
+    /// <summary>
+    /// Controlador para la gestión de usuarios del sistema.
+    /// Solo accesible para administradores.
+    /// </summary>
     [ApiController]
     [Route("usuarios")]
     [Authorize(Roles = "Admin")]
     public class UsuarioController : ControllerBase
     {
         private readonly IUsuarioService _usuarioService;
-        private readonly ILogger<UsuarioController> _logger; 
+        private readonly ILogger<UsuarioController> _logger;
 
         public UsuarioController(IUsuarioService usuarioService, ILogger<UsuarioController> logger)
         {
@@ -20,6 +24,10 @@ namespace BicTechBack.src.API.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Obtiene la lista de todos los usuarios.
+        /// </summary>
+        /// <returns>Lista de usuarios.</returns>
         [HttpGet]
         public async Task<ActionResult> GetAll()
         {
@@ -37,6 +45,13 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtiene una lista paginada de usuarios.
+        /// </summary>
+        /// <param name="page">Número de página (por defecto 1).</param>
+        /// <param name="pageSize">Cantidad de usuarios por página (por defecto 10).</param>
+        /// <param name="filtro">Filtro opcional por nombre o email.</param>
+        /// <returns>Lista paginada de usuarios y el total.</returns>
         [HttpGet("paginado")]
         public async Task<ActionResult> GetPaged([FromQuery] int page = 1, [FromQuery] int pageSize = 10,
         [FromQuery] string? filtro = null)
@@ -62,6 +77,11 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtiene un usuario por su identificador.
+        /// </summary>
+        /// <param name="id">Identificador del usuario.</param>
+        /// <returns>Usuario encontrado o error si no existe.</returns>
         [HttpGet("{id:int}")]
         public async Task<ActionResult> GetById(int id)
         {
@@ -84,6 +104,12 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Actualiza los datos de un usuario existente.
+        /// </summary>
+        /// <param name="id">Identificador del usuario a actualizar.</param>
+        /// <param name="dto">Datos nuevos del usuario.</param>
+        /// <returns>Usuario actualizado o error si no existe.</returns>
         [HttpPut("{id:int}")]
         public async Task<ActionResult> Update(int id, [FromBody] CrearUsuarioDTO dto)
         {
@@ -123,6 +149,11 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Elimina un usuario por su identificador.
+        /// </summary>
+        /// <param name="id">Identificador del usuario a eliminar.</param>
+        /// <returns>Resultado de la operación.</returns>
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {

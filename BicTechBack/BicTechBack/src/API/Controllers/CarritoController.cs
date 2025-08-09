@@ -3,16 +3,19 @@ using BicTechBack.src.Core.Interfaces;
 using BicTechBack.src.Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging; 
+using Microsoft.Extensions.Logging;
 
 namespace BicTechBack.src.API.Controllers
 {
+    /// <summary>
+    /// Controlador para la gestión de carritos de compras de los usuarios.
+    /// </summary>
     [ApiController]
     [Route("carritos")]
     public class CarritoController : ControllerBase
     {
         private readonly ICarritoService _carritoService;
-        private readonly ILogger<CarritoController> _logger; 
+        private readonly ILogger<CarritoController> _logger;
 
         public CarritoController(ICarritoService carritoService, ILogger<CarritoController> logger)
         {
@@ -20,6 +23,11 @@ namespace BicTechBack.src.API.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Obtiene la lista de todos los carritos.
+        /// Solo accesible para administradores.
+        /// </summary>
+        /// <returns>Lista de carritos.</returns>
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAll()
@@ -30,6 +38,13 @@ namespace BicTechBack.src.API.Controllers
             return Ok(carritos);
         }
 
+        /// <summary>
+        /// Obtiene una lista paginada de carritos.
+        /// </summary>
+        /// <param name="page">Número de página (por defecto 1).</param>
+        /// <param name="pageSize">Cantidad de carritos por página (por defecto 10).</param>
+        /// <param name="filtro">Filtro opcional por usuario.</param>
+        /// <returns>Lista paginada de carritos y el total.</returns>
         [HttpGet("paginado")]
         public async Task<ActionResult> GetPaged([FromQuery] int page = 1, [FromQuery] int pageSize = 10,
         [FromQuery] string? filtro = null)
@@ -55,6 +70,12 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtiene el carrito de un usuario específico.
+        /// Solo el usuario propietario o un administrador puede acceder.
+        /// </summary>
+        /// <param name="usuarioId">Identificador del usuario.</param>
+        /// <returns>Carrito del usuario o una lista vacía si no existe.</returns>
         [HttpGet("{usuarioId:int}")]
         [Authorize(Roles = "User, Admin")]
         public async Task<IActionResult> GetByUsuarioId(int usuarioId)
@@ -77,6 +98,14 @@ namespace BicTechBack.src.API.Controllers
             return Ok(carrito);
         }
 
+        /// <summary>
+        /// Actualiza la cantidad de un producto en el carrito de un usuario.
+        /// Solo el usuario propietario o un administrador puede modificarlo.
+        /// </summary>
+        /// <param name="usuarioId">Identificador del usuario.</param>
+        /// <param name="productoId">Identificador del producto.</param>
+        /// <param name="cantidad">Nueva cantidad del producto.</param>
+        /// <returns>Carrito actualizado.</returns>
         [HttpPut("{usuarioId:int}/productos/{productoId:int}")]
         [Authorize(Roles = "User, Admin")]
         public async Task<IActionResult> UpdateAmountProductoInCarrito(int usuarioId, int productoId, [FromQuery] int cantidad)
@@ -108,6 +137,14 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Agrega un producto al carrito de un usuario.
+        /// Solo el usuario propietario o un administrador puede agregar productos.
+        /// </summary>
+        /// <param name="usuarioId">Identificador del usuario.</param>
+        /// <param name="productoId">Identificador del producto.</param>
+        /// <param name="cantidad">Cantidad del producto a agregar.</param>
+        /// <returns>Carrito actualizado.</returns>
         [HttpPost("{usuarioId:int}/productos/{productoId:int}/add")]
         [Authorize(Roles = "User, Admin")]
         public async Task<IActionResult> AddProductoToCarrito(int usuarioId, int productoId, [FromQuery] int cantidad)
@@ -139,6 +176,13 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Elimina un producto del carrito de un usuario.
+        /// Solo accesible para administradores.
+        /// </summary>
+        /// <param name="usuarioId">Identificador del usuario.</param>
+        /// <param name="productoId">Identificador del producto a eliminar.</param>
+        /// <returns>Carrito actualizado.</returns>
         [HttpDelete("{usuarioId:int}/productos/{productoId:int}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteProductoFromCarrito(int usuarioId, int productoId)
@@ -157,6 +201,12 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Vacía el carrito de un usuario.
+        /// Solo accesible para administradores.
+        /// </summary>
+        /// <param name="usuarioId">Identificador del usuario.</param>
+        /// <returns>Carrito vacío.</returns>
         [HttpDelete("{usuarioId:int}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ClearCarrito(int usuarioId)

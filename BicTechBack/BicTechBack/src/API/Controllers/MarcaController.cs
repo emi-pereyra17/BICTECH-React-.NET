@@ -3,16 +3,19 @@ using BicTechBack.src.Core.Interfaces;
 using BicTechBack.src.Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging; 
+using Microsoft.Extensions.Logging;
 
 namespace BicTechBack.src.API.Controllers
 {
+    /// <summary>
+    /// Controlador para la gestión de marcas de productos.
+    /// </summary>
     [ApiController]
     [Route("marcas")]
     public class MarcaController : ControllerBase
     {
         private readonly IMarcaService _marcaService;
-        private readonly ILogger<MarcaController> _logger; 
+        private readonly ILogger<MarcaController> _logger;
 
         public MarcaController(IMarcaService marcaService, ILogger<MarcaController> logger)
         {
@@ -20,6 +23,10 @@ namespace BicTechBack.src.API.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Obtiene la lista de todas las marcas.
+        /// </summary>
+        /// <returns>Lista de marcas.</returns>
         [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult> GetAll()
@@ -38,6 +45,13 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtiene una lista paginada de marcas.
+        /// </summary>
+        /// <param name="page">Número de página (por defecto 1).</param>
+        /// <param name="pageSize">Cantidad de marcas por página (por defecto 10).</param>
+        /// <param name="filtro">Filtro opcional por nombre.</param>
+        /// <returns>Lista paginada de marcas y el total.</returns>
         [HttpGet("paginado")]
         public async Task<ActionResult> GetPaged([FromQuery] int page = 1, [FromQuery] int pageSize = 10,
         [FromQuery] string? filtro = null)
@@ -63,6 +77,11 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtiene una marca por su identificador.
+        /// </summary>
+        /// <param name="id">Identificador de la marca.</param>
+        /// <returns>Marca encontrada o error si no existe.</returns>
         [HttpGet("{id:int}")]
         [AllowAnonymous]
         public async Task<ActionResult> GetById(int id)
@@ -86,6 +105,11 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Crea una nueva marca.
+        /// </summary>
+        /// <param name="dto">Datos de la marca a crear.</param>
+        /// <returns>Marca creada.</returns>
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create([FromBody] CrearMarcaDTO dto)
@@ -115,6 +139,12 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Actualiza una marca existente.
+        /// </summary>
+        /// <param name="id">Identificador de la marca a actualizar.</param>
+        /// <param name="dto">Datos nuevos de la marca.</param>
+        /// <returns>Marca actualizada o error si no existe.</returns>
         [HttpPut("{id:int}")]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Update(int id, [FromBody] CrearMarcaDTO dto)
@@ -149,6 +179,11 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Elimina una marca por su identificador.
+        /// </summary>
+        /// <param name="id">Identificador de la marca a eliminar.</param>
+        /// <returns>Resultado de la operación.</returns>
         [HttpDelete("{id:int}")]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int id)

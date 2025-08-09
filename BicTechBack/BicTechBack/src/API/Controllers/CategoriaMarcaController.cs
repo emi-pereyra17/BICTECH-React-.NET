@@ -7,12 +7,15 @@ using Microsoft.Extensions.Logging;
 
 namespace BicTechBack.src.API.Controllers
 {
+    /// <summary>
+    /// Controlador para la gestión de relaciones entre categorías y marcas.
+    /// </summary>
     [ApiController]
     [Route("categoriaMarca")]
     public class CategoriaMarcaController : ControllerBase
     {
         private readonly ICategoriaMarcaService _categoriaMarcaService;
-        private readonly ILogger<CategoriaMarcaController> _logger; 
+        private readonly ILogger<CategoriaMarcaController> _logger;
 
         public CategoriaMarcaController(ICategoriaMarcaService categoriaMarcaService, ILogger<CategoriaMarcaController> logger)
         {
@@ -20,6 +23,10 @@ namespace BicTechBack.src.API.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Obtiene todas las relaciones categoría-marca.
+        /// </summary>
+        /// <returns>Lista de relaciones categoría-marca.</returns>
         [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult> GetAll()
@@ -38,6 +45,13 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtiene una lista paginada de relaciones categoría-marca.
+        /// </summary>
+        /// <param name="page">Número de página (por defecto 1).</param>
+        /// <param name="pageSize">Cantidad de relaciones por página (por defecto 10).</param>
+        /// <param name="filtro">Filtro opcional por categoría o marca.</param>
+        /// <returns>Lista paginada de relaciones y el total.</returns>
         [HttpGet("paginado")]
         public async Task<ActionResult> GetPaged([FromQuery] int page = 1, [FromQuery] int pageSize = 10,
         [FromQuery] string? filtro = null)
@@ -63,6 +77,11 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Crea una nueva relación entre una categoría y una marca.
+        /// </summary>
+        /// <param name="dto">Datos de la relación a crear.</param>
+        /// <returns>Relación creada.</returns>
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create([FromBody] CrearCategoriaMarcaDTO dto)
@@ -97,6 +116,11 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtiene todas las marcas asociadas a una categoría.
+        /// </summary>
+        /// <param name="id">Identificador de la categoría.</param>
+        /// <returns>Lista de marcas asociadas a la categoría.</returns>
         [HttpGet("categoria/{id:int}")]
         [AllowAnonymous]
         public async Task<ActionResult> ObtenerMarcasPorCategoria(int id)
@@ -126,6 +150,11 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtiene todas las categorías asociadas a una marca.
+        /// </summary>
+        /// <param name="id">Identificador de la marca.</param>
+        /// <returns>Lista de categorías asociadas a la marca.</returns>
         [HttpGet("marca/{id:int}")]
         [AllowAnonymous]
         public async Task<ActionResult> ObtenerCategoriasPorMarca(int id)
@@ -155,6 +184,11 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Elimina una relación categoría-marca por su identificador.
+        /// </summary>
+        /// <param name="id">Identificador de la relación a eliminar.</param>
+        /// <returns>Resultado de la operación.</returns>
         [HttpDelete("{id:int}")]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int id)

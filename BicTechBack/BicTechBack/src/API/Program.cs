@@ -1,4 +1,4 @@
-using BicTechBack.src.Core.Interfaces;
+﻿using BicTechBack.src.Core.Interfaces;
 using BicTechBack.src.Infrastructure.Data;
 using BicTechBack.src.Infrastructure.Repositories;
 using BicTechBack.src.Infrastructure.Services;
@@ -12,7 +12,24 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "BicTechBack API",
+        Version = "v1",
+        Description = "API para gestión de productos, categorías, marcas, carritos y pedidos.",
+        Contact = new Microsoft.OpenApi.Models.OpenApiContact
+        {
+            Name = "Soporte BicTech",
+            Email = "soporte@bictech.com"
+        }
+    });
+    
+    var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = System.IO.Path.Combine(AppContext.BaseDirectory, xmlFile);
+    options.IncludeXmlComments(xmlPath, includeControllerXmlComments: true);
+});
 
 builder.Services.AddScoped<IProductoRepository, ProductoRepository>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();

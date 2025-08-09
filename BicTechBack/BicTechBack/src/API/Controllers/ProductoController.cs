@@ -3,16 +3,19 @@ using BicTechBack.src.Core.Interfaces;
 using BicTechBack.src.Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging; 
+using Microsoft.Extensions.Logging;
 
 namespace BicTechBack.src.API.Controllers
 {
+    /// <summary>
+    /// Controlador para la gestión de productos.
+    /// </summary>
     [ApiController]
     [Route("productos")]
     public class ProductoController : ControllerBase
     {
         private readonly IProductoService _productoService;
-        private readonly ILogger<ProductoController> _logger; 
+        private readonly ILogger<ProductoController> _logger;
 
         public ProductoController(IProductoService productoService, ILogger<ProductoController> logger)
         {
@@ -20,6 +23,10 @@ namespace BicTechBack.src.API.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Obtiene la lista de todos los productos.
+        /// </summary>
+        /// <returns>Lista de productos.</returns>
         [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult> GetAll()
@@ -38,6 +45,13 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtiene una lista paginada de productos.
+        /// </summary>
+        /// <param name="page">Número de página (por defecto 1).</param>
+        /// <param name="pageSize">Cantidad de productos por página (por defecto 10).</param>
+        /// <param name="filtro">Filtro opcional por nombre, categoría, etc.</param>
+        /// <returns>Lista paginada de productos y el total.</returns>
         [HttpGet("paginado")]
         public async Task<ActionResult> GetPaged([FromQuery] int page = 1, [FromQuery] int pageSize = 10,
         [FromQuery] string? filtro = null)
@@ -63,6 +77,11 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtiene un producto por su identificador.
+        /// </summary>
+        /// <param name="id">Identificador del producto.</param>
+        /// <returns>Producto encontrado o error si no existe.</returns>
         [HttpGet("{id:int}")]
         [AllowAnonymous]
         public async Task<ActionResult> GetById(int id)
@@ -86,6 +105,11 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Crea un nuevo producto.
+        /// </summary>
+        /// <param name="dto">Datos del producto a crear.</param>
+        /// <returns>Producto creado.</returns>
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create([FromBody] CrearProductoDTO dto)
@@ -115,6 +139,12 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Actualiza un producto existente.
+        /// </summary>
+        /// <param name="id">Identificador del producto a actualizar.</param>
+        /// <param name="dto">Datos nuevos del producto.</param>
+        /// <returns>Producto actualizado o error si no existe.</returns>
         [HttpPut("{id:int}")]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Update(int id, [FromBody] CrearProductoDTO dto)
@@ -149,6 +179,11 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Elimina un producto por su identificador.
+        /// </summary>
+        /// <param name="id">Identificador del producto a eliminar.</param>
+        /// <returns>Resultado de la operación.</returns>
         [HttpDelete("{id:int}")]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int id)

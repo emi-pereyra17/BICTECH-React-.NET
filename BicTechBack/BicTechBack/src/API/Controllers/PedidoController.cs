@@ -3,17 +3,21 @@ using BicTechBack.src.Core.Interfaces;
 using BicTechBack.src.Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging; 
+using Microsoft.Extensions.Logging;
 using System.Data;
 
 namespace BicTechBack.src.API.Controllers
 {
+    /// <summary>
+    /// Controlador para la gestión de pedidos.
+    /// Permite a usuarios y administradores consultar, crear, actualizar y eliminar pedidos.
+    /// </summary>
     [ApiController]
     [Route("pedidos")]
     public class PedidoController : ControllerBase
     {
         private readonly IPedidoService _pedidoService;
-        private readonly ILogger<PedidoController> _logger; 
+        private readonly ILogger<PedidoController> _logger;
 
         public PedidoController(IPedidoService pedidoService, ILogger<PedidoController> logger)
         {
@@ -21,6 +25,11 @@ namespace BicTechBack.src.API.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Obtiene la lista de pedidos.
+        /// Los administradores ven todos los pedidos, los usuarios solo los suyos.
+        /// </summary>
+        /// <returns>Lista de pedidos.</returns>
         [HttpGet]
         [Authorize(Roles = "Admin,User")]
         public async Task<ActionResult> GetAll()
@@ -51,6 +60,13 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtiene una lista paginada de pedidos.
+        /// </summary>
+        /// <param name="page">Número de página (por defecto 1).</param>
+        /// <param name="pageSize">Cantidad de pedidos por página (por defecto 10).</param>
+        /// <param name="filtro">Filtro opcional por usuario, estado, etc.</param>
+        /// <returns>Lista paginada de pedidos y el total.</returns>
         [HttpGet("paginado")]
         public async Task<ActionResult> GetPaged([FromQuery] int page = 1, [FromQuery] int pageSize = 10,
         [FromQuery] string? filtro = null)
@@ -76,6 +92,12 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtiene un pedido por su identificador.
+        /// Solo el usuario propietario o un administrador puede acceder.
+        /// </summary>
+        /// <param name="id">Identificador del pedido.</param>
+        /// <returns>Pedido encontrado o error si no existe o no tiene permisos.</returns>
         [HttpGet("{id:int}")]
         [Authorize(Roles = "Admin,User")]
         public async Task<ActionResult> GetById(int id)
@@ -108,6 +130,11 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Crea un nuevo pedido.
+        /// </summary>
+        /// <param name="dto">Datos del pedido a crear.</param>
+        /// <returns>Pedido creado.</returns>
         [HttpPost]
         [Authorize(Roles = "Admin,User")]
         public async Task<ActionResult> Create([FromBody] CrearPedidoDTO dto)
@@ -132,6 +159,13 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Actualiza un pedido existente.
+        /// Solo accesible para administradores.
+        /// </summary>
+        /// <param name="id">Identificador del pedido a actualizar.</param>
+        /// <param name="dto">Datos nuevos del pedido.</param>
+        /// <returns>Pedido actualizado o error si no existe.</returns>
         [HttpPut("{id:int}")]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Update(int id, [FromBody] CrearPedidoDTO dto)
@@ -161,6 +195,12 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Elimina un pedido por su identificador.
+        /// Solo accesible para administradores.
+        /// </summary>
+        /// <param name="id">Identificador del pedido a eliminar.</param>
+        /// <returns>Resultado de la operación.</returns>
         [HttpDelete("{id:int}")]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int id)

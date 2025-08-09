@@ -2,16 +2,20 @@
 using BicTechBack.src.Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging; 
+using Microsoft.Extensions.Logging;
 
 namespace BicTechBack.src.API.Controllers
 {
+    /// <summary>
+    /// Controlador para la autenticación y gestión de usuarios.
+    /// Proporciona endpoints para registro, login, logout, actualización de contraseña y refresh de tokens.
+    /// </summary>
     [ApiController]
     [Route("auth")]
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
-        private readonly ILogger<AuthController> _logger; 
+        private readonly ILogger<AuthController> _logger;
 
         public AuthController(IAuthService authService, ILogger<AuthController> logger)
         {
@@ -19,6 +23,11 @@ namespace BicTechBack.src.API.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Registra un nuevo usuario en el sistema.
+        /// </summary>
+        /// <param name="dto">Datos del usuario a registrar.</param>
+        /// <returns>Id del usuario registrado.</returns>
         [HttpPost("register")]
         [AllowAnonymous]
         public async Task<ActionResult> Register([FromBody] RegisterUsuarioDTO dto)
@@ -48,6 +57,11 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Inicia sesión para un usuario registrado.
+        /// </summary>
+        /// <param name="dto">Credenciales de acceso del usuario.</param>
+        /// <returns>Token JWT y datos del usuario autenticado.</returns>
         [HttpPost("login")]
         [AllowAnonymous]
         public async Task<ActionResult> Login([FromBody] LoginUsuarioDTO dto)
@@ -77,6 +91,10 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Cierra la sesión del usuario autenticado.
+        /// </summary>
+        /// <returns>Mensaje de confirmación de cierre de sesión.</returns>
         [HttpPost("logout")]
         [Authorize]
         public async Task<ActionResult> Logout()
@@ -88,6 +106,13 @@ namespace BicTechBack.src.API.Controllers
             return Ok(new { message = "Sesión cerrada correctamente" });
         }
 
+        /// <summary>
+        /// Actualiza la contraseña de un usuario.
+        /// Solo el usuario propietario o un administrador pueden realizar esta acción.
+        /// </summary>
+        /// <param name="id">Identificador del usuario.</param>
+        /// <param name="password">Nueva contraseña.</param>
+        /// <returns>Mensaje de confirmación o error.</returns>
         [HttpPut("password/{id:int}")]
         [Authorize(Roles = "Admin,User")]
         public async Task<ActionResult> UpdatePassword(int id, [FromBody] string password)
@@ -126,6 +151,11 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Renueva el token de autenticación usando un refresh token válido.
+        /// </summary>
+        /// <param name="dto">Datos del token y refresh token.</param>
+        /// <returns>Nuevo token y datos del usuario autenticado.</returns>
         [HttpPost("refresh")]
         [AllowAnonymous]
         public async Task<ActionResult> Refresh([FromBody] RefreshRequestDTO dto)
