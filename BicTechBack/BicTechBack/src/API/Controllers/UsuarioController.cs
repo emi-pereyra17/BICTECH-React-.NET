@@ -2,6 +2,7 @@
 using BicTechBack.src.Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace BicTechBack.src.API.Controllers
 {
@@ -11,33 +12,40 @@ namespace BicTechBack.src.API.Controllers
     public class UsuarioController : ControllerBase
     {
         private readonly IUsuarioService _usuarioService;
+        private readonly ILogger<UsuarioController> _logger; 
 
-        public UsuarioController(IUsuarioService usuarioService)
+        public UsuarioController(IUsuarioService usuarioService, ILogger<UsuarioController> logger)
         {
             _usuarioService = usuarioService;
+            _logger = logger;
         }
 
         [HttpGet]
         public async Task<ActionResult> GetAll()
         {
+            _logger.LogInformation("Obteniendo lista de todos los usuarios.");
             try
             {
                 var usuarios = await _usuarioService.GetAllUsuariosAsync();
+                _logger.LogInformation("Usuarios obtenidos correctamente. Total: {Total}", usuarios.Count());
                 return Ok(new { message = "Lista de usuarios", usuarios });
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error al consultar los usuarios.");
                 return StatusCode(500, new { message = "Error al consultar los usuarios", error = ex.Message });
             }
         }
 
         [HttpGet("paginado")]
-        public async Task<ActionResult> GetPaged([FromQuery] int page = 1,[FromQuery] int pageSize = 10,
+        public async Task<ActionResult> GetPaged([FromQuery] int page = 1, [FromQuery] int pageSize = 10,
         [FromQuery] string? filtro = null)
         {
+            _logger.LogInformation("Obteniendo usuarios paginados. Página: {Page}, Tamaño: {PageSize}, Filtro: {Filtro}", page, pageSize, filtro);
             try
             {
                 var (usuarios, total) = await _usuarioService.GetUsuariosAsync(page, pageSize, filtro);
+                _logger.LogInformation("Usuarios paginados obtenidos correctamente. Total: {Total}", total);
                 return Ok(new
                 {
                     message = "Lista paginada de usuarios",
@@ -49,6 +57,7 @@ namespace BicTechBack.src.API.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error al consultar los usuarios paginados.");
                 return StatusCode(500, new { message = "Error al consultar los usuarios", error = ex.Message });
             }
         }
@@ -56,17 +65,21 @@ namespace BicTechBack.src.API.Controllers
         [HttpGet("{id:int}")]
         public async Task<ActionResult> GetById(int id)
         {
+            _logger.LogInformation("Buscando usuario por Id: {Id}", id);
             try
             {
                 var usuario = await _usuarioService.GetUsuarioByIdAsync(id);
+                _logger.LogInformation("Usuario encontrado. Id: {Id}", id);
                 return Ok(new { message = "Usuario encontrado", usuario });
             }
-            catch(KeyNotFoundException)
+            catch (KeyNotFoundException)
             {
-                return NotFound(new { message = "Usuario no encontrado"});
+                _logger.LogWarning("Usuario no encontrado. Id: {Id}", id);
+                return NotFound(new { message = "Usuario no encontrado" });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Error al consultar el usuario. Id: {Id}", id);
                 return StatusCode(500, new { message = "Error al consultar el usuario", error = ex.Message });
             }
         }
@@ -75,26 +88,37 @@ namespace BicTechBack.src.API.Controllers
         public async Task<ActionResult> Update(int id, [FromBody] CrearUsuarioDTO dto)
         {
             if (!ModelState.IsValid)
+            {
+                _logger.LogWarning("Datos requeridos faltantes al actualizar usuario. Id: {Id}", id);
                 return BadRequest(new { message = "Faltan datos requeridos" });
+            }
 
             if (!System.Text.RegularExpressions.Regex.IsMatch(dto.Email, @"^\S+@\S+\.\S+$"))
+            {
+                _logger.LogWarning("Formato de email inválido al actualizar usuario. Id: {Id}, Email: {Email}", id, dto.Email);
                 return BadRequest(new { message = "El email no tiene un formato válido" });
+            }
 
+            _logger.LogInformation("Intentando actualizar usuario. Id: {Id}, Email: {Email}", id, dto.Email);
             try
             {
                 var usuarioActualizado = await _usuarioService.UpdateUsuarioAsync(dto, id);
+                _logger.LogInformation("Usuario actualizado correctamente. Id: {Id}", id);
                 return Ok(new { message = "Usuario actualizado", usuario = usuarioActualizado });
             }
             catch (KeyNotFoundException)
             {
+                _logger.LogWarning("Usuario no encontrado al intentar actualizar. Id: {Id}", id);
                 return NotFound(new { message = "Usuario no encontrado" });
             }
             catch (InvalidOperationException ex)
             {
+                _logger.LogWarning("Operación inválida al actualizar usuario. Id: {Id}, Error: {Error}", id, ex.Message);
                 return BadRequest(new { message = ex.Message });
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error al actualizar el usuario. Id: {Id}", id);
                 return StatusCode(500, new { message = "Error al actualizar el usuario", error = ex.Message });
             }
         }
@@ -102,18 +126,22 @@ namespace BicTechBack.src.API.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
+            _logger.LogInformation("Intentando eliminar usuario. Id: {Id}", id);
             try
             {
                 var eliminado = await _usuarioService.DeleteUsuarioAsync(id);
                 if (!eliminado)
                 {
+                    _logger.LogWarning("Usuario no encontrado al intentar eliminar. Id: {Id}", id);
                     return NotFound(new { message = "Usuario no encontrado" });
                 }
-                return Ok(new { message = "Usuario eliminado"});
+                _logger.LogInformation("Usuario eliminado correctamente. Id: {Id}", id);
+                return Ok(new { message = "Usuario eliminado" });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return StatusCode(500, new { message = "Error al eliminar el usuario", error = ex.Message } );
+                _logger.LogError(ex, "Error al eliminar el usuario. Id: {Id}", id);
+                return StatusCode(500, new { message = "Error al eliminar el usuario", error = ex.Message });
             }
         }
     }

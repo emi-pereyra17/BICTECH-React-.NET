@@ -45,6 +45,13 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+var jwtKey = Environment.GetEnvironmentVariable("JWT_KEY");
+
+if (!string.IsNullOrEmpty(jwtKey))
+{
+    builder.Configuration["Jwt:Key"] = jwtKey;
+}
+
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 var key = jwtSettings["Key"];
 
