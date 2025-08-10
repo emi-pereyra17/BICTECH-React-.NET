@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("BicTechBack")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("BicTechBack.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a44c613c42e3d18cf828ead11306a2e9dc84a67b")]
-[assembly: System.Reflection.AssemblyProductAttribute("BicTechBack")]
-[assembly: System.Reflection.AssemblyTitleAttribute("BicTechBack")]
+[assembly: System.Reflection.AssemblyProductAttribute("BicTechBack.Tests")]
+[assembly: System.Reflection.AssemblyTitleAttribute("BicTechBack.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Generado por la clase WriteCodeFragment de MSBuild.
