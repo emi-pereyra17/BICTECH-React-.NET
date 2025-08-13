@@ -3,16 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0AA38C54-F030-411A-82C6-8679835B7723}|BicTechBack.Tests\\BicTechBack.Tests.csproj|c:\\users\\emi\\desktop\\guardar\\.net proyectos\\repos\\bictech\\bictechback\\bictechback.tests\\productoservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0AA38C54-F030-411A-82C6-8679835B7723}|BicTechBack.Tests\\BicTechBack.Tests.csproj|solutionrelative:bictechback.tests\\productoservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8A177184-3480-40F3-9E3D-9394DD6F4EAA}|BicTechBack\\BicTechBack.csproj|c:\\users\\emi\\desktop\\guardar\\.net proyectos\\repos\\bictech\\bictechback\\bictechback\\src\\infrastructure\\services\\productoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8A177184-3480-40F3-9E3D-9394DD6F4EAA}|BicTechBack\\BicTechBack.csproj|solutionrelative:bictechback\\src\\infrastructure\\services\\productoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8A177184-3480-40F3-9E3D-9394DD6F4EAA}|BicTechBack\\BicTechBack.csproj|c:\\users\\emi\\desktop\\guardar\\.net proyectos\\repos\\bictech\\bictechback\\bictechback\\src\\core\\dtos\\crearproductodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8A177184-3480-40F3-9E3D-9394DD6F4EAA}|BicTechBack\\BicTechBack.csproj|solutionrelative:bictechback\\src\\core\\dtos\\crearproductodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8A177184-3480-40F3-9E3D-9394DD6F4EAA}|BicTechBack\\BicTechBack.csproj|c:\\users\\emi\\desktop\\guardar\\.net proyectos\\repos\\bictech\\bictechback\\bictechback\\src\\core\\entities\\marca.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8A177184-3480-40F3-9E3D-9394DD6F4EAA}|BicTechBack\\BicTechBack.csproj|solutionrelative:bictechback\\src\\core\\entities\\marca.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,41 +26,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CrearProductoDTO.cs",
-              "DocumentMoniker": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack\\src\\Core\\DTOs\\CrearProductoDTO.cs",
-              "RelativeDocumentMoniker": "BicTechBack\\src\\Core\\DTOs\\CrearProductoDTO.cs",
-              "ToolTip": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack\\src\\Core\\DTOs\\CrearProductoDTO.cs",
-              "RelativeToolTip": "BicTechBack\\src\\Core\\DTOs\\CrearProductoDTO.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-09T23:57:04.453Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ProductoService.cs",
-              "DocumentMoniker": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack\\src\\Infrastructure\\Services\\ProductoService.cs",
-              "RelativeDocumentMoniker": "BicTechBack\\src\\Infrastructure\\Services\\ProductoService.cs",
-              "ToolTip": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack\\src\\Infrastructure\\Services\\ProductoService.cs",
-              "RelativeToolTip": "BicTechBack\\src\\Infrastructure\\Services\\ProductoService.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAQwCIAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-09T23:51:20.773Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ProductoServiceTests.cs",
-              "DocumentMoniker": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack.Tests\\ProductoServiceTests.cs",
-              "RelativeDocumentMoniker": "BicTechBack.Tests\\ProductoServiceTests.cs",
-              "ToolTip": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack.Tests\\ProductoServiceTests.cs",
-              "RelativeToolTip": "BicTechBack.Tests\\ProductoServiceTests.cs",
-              "ViewState": "AgIAAKAAAAAAAAAAAAAowLAAAAAJAAAAAAAAAA==",
+              "Title": "Marca.cs",
+              "DocumentMoniker": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack\\src\\Core\\Entities\\Marca.cs",
+              "RelativeDocumentMoniker": "BicTechBack\\src\\Core\\Entities\\Marca.cs",
+              "ToolTip": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack\\src\\Core\\Entities\\Marca.cs",
+              "RelativeToolTip": "BicTechBack\\src\\Core\\Entities\\Marca.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAABAAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-09T23:49:38.907Z",
+              "WhenOpened": "2025-08-12T23:35:18.587Z",
               "EditorCaption": ""
             }
           ]
