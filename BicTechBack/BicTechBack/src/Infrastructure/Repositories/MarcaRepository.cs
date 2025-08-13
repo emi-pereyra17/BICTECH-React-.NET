@@ -37,15 +37,23 @@ namespace BicTechBack.src.Infrastructure.Repositories
             return await _context.Marcas.AnyAsync(m => m.Id == id);
         }
 
+        public async Task<bool> ExistsByNameAsync(string nombre, int? excludeId = null)
+        {
+            return await _context.Marcas
+                .AnyAsync(m => m.Nombre.ToLower() == nombre.ToLower() && (!excludeId.HasValue || m.Id != excludeId.Value));
+        }
+
         public async Task<IEnumerable<Marca>> GetAllAsync()
         {
             return await _context.Marcas
+                .Include(m => m.Pais)
                 .ToListAsync();
         }
 
         public async Task<Marca?> GetByIdAsync(int id)
         {
             return await _context.Marcas
+                .Include(m => m.Pais)
                 .FirstOrDefaultAsync(m => m.Id == id);
         }
 

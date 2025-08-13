@@ -12,7 +12,8 @@ namespace BicTechBack.src.Core.Mappings
 
             CreateMap<Marca, MarcaDTO>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
-                .ForMember(dest => dest.Nombre, opt => opt.MapFrom(src => src.Nombre));
+                .ForMember(dest => dest.Nombre, opt => opt.MapFrom(src => src.Nombre))
+                .ForMember(dest => dest.Pais, opt => opt.MapFrom(src => src.Pais.Nombre));
         }
     }
 }

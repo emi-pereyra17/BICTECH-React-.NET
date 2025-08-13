@@ -52,10 +52,10 @@ namespace BicTechBack.Tests
                 mockLogger.Object
             );
 
-            // Act
+
             var result = await service.CreateProductoAsync(dto);
 
-            // Assert
+
             Assert.NotNull(result);
             Assert.Equal(dto.Nombre, result.Nombre);
             mockRepo.Verify(r => r.AddAsync(It.IsAny<Producto>()), Times.Once);
@@ -142,7 +142,6 @@ namespace BicTechBack.Tests
         [Fact]
         public async Task CreateProductoAsync_MarcaNoExiste_LanzaInvalidOperationException()
         {
-            // Arrange
             var mockRepo = new Mock<IProductoRepository>();
             var mockCategoriaRepo = new Mock<ICategoriaRepository>();
             var mockMarcaRepo = new Mock<IMarcaRepository>();
@@ -172,7 +171,6 @@ namespace BicTechBack.Tests
                 mockLogger.Object
             );
 
-            // Act & Assert
             await Assert.ThrowsAsync<InvalidOperationException>(() => service.CreateProductoAsync(dto));
         }
     }

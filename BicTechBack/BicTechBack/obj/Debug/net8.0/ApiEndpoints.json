@@ -530,6 +530,111 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "BicTechBack.src.API.Controllers.PaisController",
+    "Method": "GetAll",
+    "RelativePath": "paises",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BicTechBack.src.API.Controllers.PaisController",
+    "Method": "Create",
+    "RelativePath": "paises",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "BicTechBack.src.Core.DTOs.CrearPaisDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BicTechBack.src.API.Controllers.PaisController",
+    "Method": "GetById",
+    "RelativePath": "paises/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BicTechBack.src.API.Controllers.PaisController",
+    "Method": "Update",
+    "RelativePath": "paises/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "BicTechBack.src.Core.DTOs.CrearPaisDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BicTechBack.src.API.Controllers.PaisController",
+    "Method": "Delete",
+    "RelativePath": "paises/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BicTechBack.src.API.Controllers.PaisController",
+    "Method": "GetPaged",
+    "RelativePath": "paises/paginado",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "filtro",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "BicTechBack.src.API.Controllers.PedidoController",
     "Method": "GetAll",
     "RelativePath": "pedidos",
