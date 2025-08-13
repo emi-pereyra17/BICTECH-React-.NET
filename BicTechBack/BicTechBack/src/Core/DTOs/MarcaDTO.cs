@@ -14,5 +14,9 @@
         /// Nombre de la marca.
         /// </summary>
         public string Nombre { get; set; }
+        /// <summary>
+        /// Nombre del país al que pertenece la marca.
+        /// </summary>
+        public string Pais { get; set; }
     }
 }

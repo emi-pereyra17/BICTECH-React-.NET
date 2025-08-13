@@ -9,12 +9,14 @@ namespace BicTechBack.src.Infrastructure.Services
     public class MarcaService : IMarcaService
     {
         private readonly IMarcaRepository _repository;
+        private readonly IPaisRepository _paisRepository;
         private readonly IMapper _mapper;
         private readonly ILogger<MarcaService> _logger; 
 
-        public MarcaService(IMarcaRepository repository, IMapper mapper, ILogger<MarcaService> logger) 
+        public MarcaService(IMarcaRepository repository, IMapper mapper, ILogger<MarcaService> logger, IPaisRepository paisRepository) 
         {
             _repository = repository;
+            _paisRepository = paisRepository;
             _mapper = mapper;
             _logger = logger;
         }
@@ -22,13 +24,19 @@ namespace BicTechBack.src.Infrastructure.Services
         public async Task<MarcaDTO> CreateMarcaAsync(CrearMarcaDTO dto)
         {
             _logger.LogInformation("Intentando crear marca: {Nombre}", dto.Nombre);
+            var pais = await _paisRepository.GetByIdAsync(dto.PaisId);
+            if (pais == null)
+            {
+                _logger.LogWarning("País no encontrado al intentar crear marca. Id: {PaisId}", dto.PaisId);
+                throw new KeyNotFoundException("País no encontrado.");
+            }
 
-            var marcas = await _repository.GetAllAsync();
-            if (marcas.Any(m => m.Nombre.Equals(dto.Nombre, StringComparison.OrdinalIgnoreCase)))
+            if (await _repository.ExistsByNameAsync(dto.Nombre))
             {
                 _logger.LogWarning("Intento de crear marca con nombre duplicado: {Nombre}", dto.Nombre);
                 throw new InvalidOperationException("Ya existe una marca con ese nombre.");
             }
+
             var marca = _mapper.Map<Marca>(dto);
             var marcaCreada = await _repository.AddAsync(marca);
 
@@ -61,6 +69,7 @@ namespace BicTechBack.src.Infrastructure.Services
                 _logger.LogInformation("No se encontraron marcas en la base de datos.");
                 return Enumerable.Empty<MarcaDTO>();
             }
+
             return _mapper.Map<IEnumerable<MarcaDTO>>(marcas);
         }
 
@@ -97,7 +106,7 @@ namespace BicTechBack.src.Infrastructure.Services
             _logger.LogInformation("Intentando actualizar marca. Id: {Id}, Nombre: {Nombre}", id, dto.Nombre);
 
             var marcaExistente = await _repository.GetByIdAsync(id);
-            var marcas = await _repository.GetAllAsync();
+            var pais = await _paisRepository.GetByIdAsync(dto.PaisId);
 
             if (marcaExistente == null)
             {
@@ -105,11 +114,18 @@ namespace BicTechBack.src.Infrastructure.Services
                 throw new KeyNotFoundException("Marca no encontrada.");
             }
 
-            if (marcas.Any(m => m.Nombre.Equals(dto.Nombre, StringComparison.OrdinalIgnoreCase) && m.Id != id))
+            if (pais == null)
+            {
+                _logger.LogWarning("País no encontrado al intentar crear marca. Id: {PaisId}", dto.PaisId);
+                throw new KeyNotFoundException("País no encontrado.");
+            }
+
+            if (await _repository.ExistsByNameAsync(dto.Nombre, id))
             {
                 _logger.LogWarning("Intento de actualizar marca con nombre duplicado: {Nombre}", dto.Nombre);
                 throw new InvalidOperationException("Ya existe una marca con ese nombre.");
             }
+
 
             _mapper.Map(dto, marcaExistente);
 

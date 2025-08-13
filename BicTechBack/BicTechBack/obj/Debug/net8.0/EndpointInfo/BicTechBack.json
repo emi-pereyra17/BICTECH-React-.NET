@@ -910,6 +910,184 @@
         }
       }
     },
+    "/paises": {
+      "get": {
+        "tags": [
+          "Pais"
+        ],
+        "summary": "Obtiene la lista de todos los países.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Pais"
+        ],
+        "summary": "Crea un nuevo país.",
+        "requestBody": {
+          "description": "Datos del país a crear.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearPaisDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearPaisDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearPaisDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/paises/paginado": {
+      "get": {
+        "tags": [
+          "Pais"
+        ],
+        "summary": "Obtiene una lista paginada de países.",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Número de página (por defecto 1).",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Cantidad de países por página (por defecto 10).",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          },
+          {
+            "name": "filtro",
+            "in": "query",
+            "description": "Filtro opcional por nombre.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/paises/{id}": {
+      "get": {
+        "tags": [
+          "Pais"
+        ],
+        "summary": "Obtiene un país por su identificador.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identificador del país.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Pais"
+        ],
+        "summary": "Actualiza un país existente.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identificador del país a actualizar.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Datos nuevos del país.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearPaisDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearPaisDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearPaisDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Pais"
+        ],
+        "summary": "Elimina un país por su identificador.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identificador del país a eliminar.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/pedidos": {
       "get": {
         "tags": [
@@ -1459,7 +1637,8 @@
       },
       "CrearMarcaDTO": {
         "required": [
-          "nombre"
+          "nombre",
+          "paisId"
         ],
         "type": "object",
         "properties": {
@@ -1468,10 +1647,33 @@
             "minLength": 0,
             "type": "string",
             "description": "Nombre de la marca."
+          },
+          "paisId": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "description": "Identificador de país que se agregará al la marca.",
+            "format": "int32"
           }
         },
         "additionalProperties": false,
         "description": "DTO para crear una nueva marca."
+      },
+      "CrearPaisDTO": {
+        "required": [
+          "nombre"
+        ],
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "Nombre del país."
+          }
+        },
+        "additionalProperties": false,
+        "description": "DTO para crear un nuevo país."
       },
       "CrearPedidoDTO": {
         "required": [
@@ -1714,6 +1916,10 @@
     {
       "name": "Marca",
       "description": "Controlador para la gestión de marcas de productos."
+    },
+    {
+      "name": "Pais",
+      "description": "Controlador para la gestión de paises de marcas."
     },
     {
       "name": "Pedido",

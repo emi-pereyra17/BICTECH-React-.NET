@@ -121,9 +121,31 @@ namespace BicTechBack.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("PaisId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("PaisId");
+
                     b.ToTable("Marcas");
+                });
+
+            modelBuilder.Entity("BicTechBack.src.Core.Entities.Pais", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Paises");
                 });
 
             modelBuilder.Entity("BicTechBack.src.Core.Entities.Pedido", b =>
@@ -313,6 +335,17 @@ namespace BicTechBack.Migrations
                     b.Navigation("Marca");
                 });
 
+            modelBuilder.Entity("BicTechBack.src.Core.Entities.Marca", b =>
+                {
+                    b.HasOne("BicTechBack.src.Core.Entities.Pais", "Pais")
+                        .WithMany("Marcas")
+                        .HasForeignKey("PaisId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Pais");
+                });
+
             modelBuilder.Entity("BicTechBack.src.Core.Entities.Pedido", b =>
                 {
                     b.HasOne("BicTechBack.src.Core.Entities.Usuario", "Usuario")
@@ -379,6 +412,11 @@ namespace BicTechBack.Migrations
                     b.Navigation("CategoriasMarcas");
 
                     b.Navigation("Productos");
+                });
+
+            modelBuilder.Entity("BicTechBack.src.Core.Entities.Pais", b =>
+                {
+                    b.Navigation("Marcas");
                 });
 
             modelBuilder.Entity("BicTechBack.src.Core.Entities.Pedido", b =>

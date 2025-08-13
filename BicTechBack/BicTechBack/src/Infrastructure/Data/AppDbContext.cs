@@ -15,6 +15,7 @@ namespace BicTechBack.src.Infrastructure.Data
         public DbSet<CarritoDetalle> CarritosDetalles { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Marca> Marcas { get; set; }
+        public DbSet <Pais> Paises { get; set; }
         public DbSet<CategoriaMarca> CategoriasMarcas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -46,6 +47,12 @@ namespace BicTechBack.src.Infrastructure.Data
                 .WithMany(m => m.Productos)
                 .HasForeignKey(p => p.MarcaId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Marca>()
+                .HasOne(m => m.Pais)
+                .WithMany(p => p.Marcas)
+                .HasForeignKey(m => m.PaisId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Carrito>()
                 .HasOne(c => c.Usuario)
