@@ -314,7 +314,7 @@ namespace BicTechBack.Tests
         }
 
         [Fact]
-        public async Task GetProductoByIdAsync_ProductoNoExistente_RetornaNull()
+        public async Task GetProductoByIdAsync_ProductoNoExistente_LanzaKeyNotFoundException()
         {
             var mockRepo = new Mock<IProductoRepository>();
             var mockLogger = new Mock<ILogger<ProductoService>>();
@@ -323,8 +323,6 @@ namespace BicTechBack.Tests
             int productoId = 99;
 
             mockRepo.Setup(r => r.GetByIdAsync(productoId)).ReturnsAsync((Producto?)null);
-            mockMapper.Setup(m => m.Map<ProductoDTO>(It.IsAny<Producto>()))
-                .Returns((ProductoDTO?)null);
 
             var service = new ProductoService(
                 mockRepo.Object,
@@ -334,8 +332,10 @@ namespace BicTechBack.Tests
                 mockLogger.Object
             );
 
-            var result = await service.GetProductoByIdAsync(productoId);
-            Assert.Null(result);
+            await Assert.ThrowsAsync<KeyNotFoundException>(async () =>
+            {
+                await service.GetProductoByIdAsync(productoId);
+            });
             mockRepo.Verify(r => r.GetByIdAsync(productoId), Times.Once);
         }
 
@@ -465,6 +465,221 @@ namespace BicTechBack.Tests
             Assert.Equal(producto.Descripcion, result.Descripcion);
             Assert.Equal(producto.Stock, result.Stock);
             mockRepo.Verify(r => r.UpdateAsync(It.IsAny<Producto>()), Times.Once);
+        }
+
+        [Fact]
+        public async Task UpdateProductoAsync_ProductoNoExistente_LanzaKeyNotFoundException()
+        {
+            var mockRepo = new Mock<IProductoRepository>();
+            var mockCategoriaRepo = new Mock<ICategoriaRepository>();
+            var mockMarcaRepo = new Mock<IMarcaRepository>();
+            var mockMapper = new Mock<IMapper>();
+            var mockLogger = new Mock<ILogger<ProductoService>>();
+
+            var productoExistenteId = 1;
+
+            var producto = new CrearProductoDTO
+            {
+                Nombre = "Producto Actualizado",
+                Precio = 150,
+                Descripcion = "Descripción Actualizada",
+                CategoriaId = 1,
+                MarcaId = 1,
+                Stock = 20,
+                ImagenUrl = "http://example.com/imagen_actualizada.jpg"
+            };
+
+            mockRepo.Setup(r => r.GetByIdAsync(productoExistenteId)).ReturnsAsync((Producto?)null);
+            mockCategoriaRepo.Setup(r => r.ExistsAsync(producto.CategoriaId)).ReturnsAsync(true);
+            mockMarcaRepo.Setup(r => r.ExistsAsync(producto.MarcaId)).ReturnsAsync(true);
+            mockMapper.Setup(m => m.Map<Producto>(producto)).Returns(new Producto
+            {
+                Id = productoExistenteId,
+                Nombre = producto.Nombre,
+                Precio = producto.Precio,
+                Descripcion = producto.Descripcion,
+                CategoriaId = producto.CategoriaId,
+                MarcaId = producto.MarcaId,
+                Stock = producto.Stock,
+                ImagenUrl = producto.ImagenUrl
+            });
+
+            var service = new ProductoService(
+                mockRepo.Object,
+                mockMarcaRepo.Object,
+                mockCategoriaRepo.Object,
+                mockMapper.Object,
+                mockLogger.Object
+            );
+
+            await Assert.ThrowsAsync<KeyNotFoundException>(async () =>
+            {
+                await service.UpdateProductoAsync(productoExistenteId, producto);
+            });
+
+            mockRepo.Verify(r => r.GetByIdAsync(productoExistenteId), Times.Once);
+            mockRepo.Verify(r => r.UpdateAsync(It.IsAny<Producto>()), Times.Never);
+        }
+
+        [Fact]
+        public async Task UpdateProductoAsync_NombreDuplicado_LanzaInvalidOperationException()
+        {
+            var mockRepo = new Mock<IProductoRepository>();
+            var mockCategoriaRepo = new Mock<ICategoriaRepository>();
+            var mockMarcaRepo = new Mock<IMarcaRepository>();
+            var mockMapper = new Mock<IMapper>();
+            var mockLogger = new Mock<ILogger<ProductoService>>();
+            var productoExistenteId = 1;
+            var producto = new CrearProductoDTO
+            {
+                Nombre = "Producto Duplicado",
+                Precio = 150,
+                Descripcion = "Descripción Actualizada",
+                CategoriaId = 1,
+                MarcaId = 1,
+                Stock = 20,
+                ImagenUrl = "http://example.com/imagen_actualizada.jpg"
+            };
+            mockRepo.Setup(r => r.GetByIdAsync(productoExistenteId)).ReturnsAsync(new Producto
+            {
+                Id = productoExistenteId,
+                Nombre = "Producto Antiguo"
+            });
+            mockRepo.Setup(r => r.GetAllAsync()).ReturnsAsync(new List<Producto>
+            {
+                new Producto { Id = 1, Nombre = "Producto Antiguo" },
+                new Producto { Id = 2, Nombre = "Producto Duplicado" }
+            });
+            mockCategoriaRepo.Setup(r => r.ExistsAsync(producto.CategoriaId)).ReturnsAsync(true);
+            mockMarcaRepo.Setup(r => r.ExistsAsync(producto.MarcaId)).ReturnsAsync(true);
+            mockMapper.Setup(m => m.Map<Producto>(producto)).Returns(new Producto
+            {
+                Id = productoExistenteId,
+                Nombre = producto.Nombre,
+                Precio = producto.Precio,
+                Descripcion = producto.Descripcion,
+                CategoriaId = producto.CategoriaId,
+                MarcaId = producto.MarcaId,
+                Stock = producto.Stock,
+                ImagenUrl = producto.ImagenUrl
+            });
+            var service = new ProductoService(
+                mockRepo.Object,
+                mockMarcaRepo.Object,
+                mockCategoriaRepo.Object,
+                mockMapper.Object,
+                mockLogger.Object
+            );
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            {
+                await service.UpdateProductoAsync(productoExistenteId, producto);
+            });
+            mockRepo.Verify(r => r.GetByIdAsync(productoExistenteId), Times.Once);
+            mockRepo.Verify(r => r.UpdateAsync(It.IsAny<Producto>()), Times.Never);
+        }
+
+        [Fact]
+        public async Task UpdateProductoAsync_CategoriaNoExiste_LanzaInvalidOperationException()
+        {
+            var mockRepo = new Mock<IProductoRepository>();
+            var mockCategoriaRepo = new Mock<ICategoriaRepository>();
+            var mockMarcaRepo = new Mock<IMarcaRepository>();
+            var mockMapper = new Mock<IMapper>();
+            var mockLogger = new Mock<ILogger<ProductoService>>();
+            var productoExistenteId = 1;
+            var producto = new CrearProductoDTO
+            {
+                Nombre = "Producto Actualizado",
+                Precio = 150,
+                Descripcion = "Descripción Actualizada",
+                CategoriaId = 99, // Categoria no existente
+                MarcaId = 1,
+                Stock = 20,
+                ImagenUrl = "http://example.com/imagen_actualizada.jpg"
+            };
+            mockRepo.Setup(r => r.GetByIdAsync(productoExistenteId)).ReturnsAsync(new Producto
+            {
+                Id = productoExistenteId,
+                Nombre = "Producto Antiguo"
+            });
+            mockCategoriaRepo.Setup(r => r.ExistsAsync(producto.CategoriaId)).ReturnsAsync(false);
+            mockMarcaRepo.Setup(r => r.ExistsAsync(producto.MarcaId)).ReturnsAsync(true);
+            mockMapper.Setup(m => m.Map<Producto>(producto)).Returns(new Producto
+            {
+                Id = productoExistenteId,
+                Nombre = producto.Nombre,
+                Precio = producto.Precio,
+                Descripcion = producto.Descripcion,
+                CategoriaId = producto.CategoriaId,
+                MarcaId = producto.MarcaId,
+                Stock = producto.Stock,
+                ImagenUrl = producto.ImagenUrl
+            });
+            var service = new ProductoService(
+                mockRepo.Object,
+                mockMarcaRepo.Object,
+                mockCategoriaRepo.Object,
+                mockMapper.Object,
+                mockLogger.Object
+            );
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            {
+                await service.UpdateProductoAsync(productoExistenteId, producto);
+            });
+            mockRepo.Verify(r => r.GetByIdAsync(productoExistenteId), Times.Once);
+            mockRepo.Verify(r => r.UpdateAsync(It.IsAny<Producto>()), Times.Never);
+        }
+
+        [Fact]
+        public async Task UpdateProductoAsync_MarcaNoExiste_LanzaInvalidOperationException()
+        {
+            var mockRepo = new Mock<IProductoRepository>();
+            var mockCategoriaRepo = new Mock<ICategoriaRepository>();
+            var mockMarcaRepo = new Mock<IMarcaRepository>();
+            var mockMapper = new Mock<IMapper>();
+            var mockLogger = new Mock<ILogger<ProductoService>>();
+            var productoExistenteId = 1;
+            var producto = new CrearProductoDTO
+            {
+                Nombre = "Producto Actualizado",
+                Precio = 150,
+                Descripcion = "Descripción Actualizada",
+                CategoriaId = 1,
+                MarcaId = 99, // Marca no existente
+                Stock = 20,
+                ImagenUrl = "http://example.com/imagen_actualizada.jpg"
+            };
+            mockRepo.Setup(r => r.GetByIdAsync(productoExistenteId)).ReturnsAsync(new Producto
+            {
+                Id = productoExistenteId,
+                Nombre = "Producto Antiguo"
+            });
+            mockCategoriaRepo.Setup(r => r.ExistsAsync(producto.CategoriaId)).ReturnsAsync(true);
+            mockMarcaRepo.Setup(r => r.ExistsAsync(producto.MarcaId)).ReturnsAsync(false);
+            mockMapper.Setup(m => m.Map<Producto>(producto)).Returns(new Producto
+            {
+                Id = productoExistenteId,
+                Nombre = producto.Nombre,
+                Precio = producto.Precio,
+                Descripcion = producto.Descripcion,
+                CategoriaId = producto.CategoriaId,
+                MarcaId = producto.MarcaId,
+                Stock = producto.Stock,
+                ImagenUrl = producto.ImagenUrl
+            });
+            var service = new ProductoService(
+                mockRepo.Object,
+                mockMarcaRepo.Object,
+                mockCategoriaRepo.Object,
+                mockMapper.Object,
+                mockLogger.Object
+            );
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            {
+                await service.UpdateProductoAsync(productoExistenteId, producto);
+            });
+            mockRepo.Verify(r => r.GetByIdAsync(productoExistenteId), Times.Once);
+            mockRepo.Verify(r => r.UpdateAsync(It.IsAny<Producto>()), Times.Never);
         }
     }
 }
