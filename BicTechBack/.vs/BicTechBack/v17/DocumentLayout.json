@@ -42,8 +42,7 @@
               "RelativeToolTip": "BicTechBack\\src\\Core\\DTOs\\CrearProductoDTO.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-09T23:57:04.453Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-09T23:57:04.453Z"
             },
             {
               "$type": "Document",
@@ -55,8 +54,7 @@
               "RelativeToolTip": "BicTechBack\\src\\Infrastructure\\Services\\ProductoService.cs",
               "ViewState": "AgIAAA4AAAAAAAAAAAAQwCIAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-09T23:51:20.773Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-09T23:51:20.773Z"
             },
             {
               "$type": "Document",
@@ -66,7 +64,7 @@
               "RelativeDocumentMoniker": "BicTechBack.Tests\\ProductoServiceTests.cs",
               "ToolTip": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack.Tests\\ProductoServiceTests.cs",
               "RelativeToolTip": "BicTechBack.Tests\\ProductoServiceTests.cs",
-              "ViewState": "AgIAAKAAAAAAAAAAAAAowLAAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAJEAAAAAAAAAAAAowLAAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-09T23:49:38.907Z",
               "EditorCaption": ""
