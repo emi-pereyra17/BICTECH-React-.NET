@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BicTechBack.Tests
+namespace BicTechBack.Tests.Unit.Services
 {
     public class ProductoServiceTests
     {

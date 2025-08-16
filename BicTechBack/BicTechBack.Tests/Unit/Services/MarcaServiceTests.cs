@@ -11,7 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace BicTechBack.Tests
+namespace BicTechBack.Tests.Unit.Services
 {
     public class MarcaServiceTests
     {
