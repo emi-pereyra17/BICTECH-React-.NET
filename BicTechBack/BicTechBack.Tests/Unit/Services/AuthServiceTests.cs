@@ -2,7 +2,7 @@
 using BicTechBack.src.Core.DTOs;
 using BicTechBack.src.Core.Entities;
 using BicTechBack.src.Core.Interfaces;
-using BicTechBack.src.Infrastructure.Services;
+using BicTechBack.src.Core.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;

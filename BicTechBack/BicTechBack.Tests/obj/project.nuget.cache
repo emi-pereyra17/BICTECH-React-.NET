@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bhzmT0DxR4I=",
+  "dgSpecHash": "ePRedWfMbpA=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack.Tests\\BicTechBack.Tests.csproj",
+  "projectFilePath": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack.Tests\\BicTechBack.UnitTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Emi\\.nuget\\packages\\automapper\\15.0.0\\automapper.15.0.0.nupkg.sha512",
     "C:\\Users\\Emi\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
@@ -120,9 +120,9 @@
       "code": "NU1608",
       "level": "Warning",
       "message": "Se detectó una versión del paquete fuera de la restricción de dependencia: AutoMapper.Extensions.Microsoft.DependencyInjection 12.0.1 requiere AutoMapper (= 12.0.1), pero la versión AutoMapper 15.0.0 ya se resolvió.",
-      "projectPath": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack.Tests\\BicTechBack.Tests.csproj",
+      "projectPath": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack.Tests\\BicTechBack.UnitTests.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack.Tests\\BicTechBack.Tests.csproj",
+      "filePath": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack.Tests\\BicTechBack.UnitTests.csproj",
       "libraryId": "AutoMapper",
       "targetGraphs": [
         "net8.0"

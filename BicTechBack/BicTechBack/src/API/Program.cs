@@ -1,7 +1,7 @@
 ﻿using BicTechBack.src.Core.Interfaces;
+using BicTechBack.src.Core.Services;
 using BicTechBack.src.Infrastructure.Data;
 using BicTechBack.src.Infrastructure.Repositories;
-using BicTechBack.src.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;

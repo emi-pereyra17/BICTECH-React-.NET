@@ -5,7 +5,9 @@ VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BicTechBack", "BicTechBack\BicTechBack.csproj", "{8A177184-3480-40F3-9E3D-9394DD6F4EAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BicTechBack.Tests", "BicTechBack.Tests\BicTechBack.Tests.csproj", "{0AA38C54-F030-411A-82C6-8679835B7723}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BicTechBack.UnitTests", "BicTechBack.Tests\BicTechBack.UnitTests.csproj", "{0AA38C54-F030-411A-82C6-8679835B7723}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BicTechBack.IntegrationTests", "IntegrationTests\BicTechBack.IntegrationTests.csproj", "{4354F4DA-F3B3-4DFB-A0C0-7695740FEE2E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{0AA38C54-F030-411A-82C6-8679835B7723}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AA38C54-F030-411A-82C6-8679835B7723}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AA38C54-F030-411A-82C6-8679835B7723}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4354F4DA-F3B3-4DFB-A0C0-7695740FEE2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4354F4DA-F3B3-4DFB-A0C0-7695740FEE2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4354F4DA-F3B3-4DFB-A0C0-7695740FEE2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4354F4DA-F3B3-4DFB-A0C0-7695740FEE2E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

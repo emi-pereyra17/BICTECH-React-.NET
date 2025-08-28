@@ -26,8 +26,6 @@
 
   <ItemGroup>
     <Folder Include="src\Core\Exceptions\" />
-    <Folder Include="tests\IntegrationTests\" />
-    <Folder Include="tests\UnitTests\" />
   </ItemGroup>
 
 </Project>
