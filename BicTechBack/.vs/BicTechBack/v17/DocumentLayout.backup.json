@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4354F4DA-F3B3-4DFB-A0C0-7695740FEE2E}|IntegrationTests\\BicTechBack.IntegrationTests.csproj|c:\\users\\emi\\desktop\\guardar\\.net proyectos\\repos\\bictech\\bictechback\\integrationtests\\integration\\services\\usuarioserviceintegration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4354F4DA-F3B3-4DFB-A0C0-7695740FEE2E}|IntegrationTests\\BicTechBack.IntegrationTests.csproj|solutionrelative:integrationtests\\integration\\services\\usuarioserviceintegration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4354F4DA-F3B3-4DFB-A0C0-7695740FEE2E}|IntegrationTests\\BicTechBack.IntegrationTests.csproj|c:\\users\\emi\\desktop\\guardar\\.net proyectos\\repos\\bictech\\bictechback\\integrationtests\\services\\authserviceintegration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4354F4DA-F3B3-4DFB-A0C0-7695740FEE2E}|IntegrationTests\\BicTechBack.IntegrationTests.csproj|solutionrelative:integrationtests\\services\\authserviceintegration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8A177184-3480-40F3-9E3D-9394DD6F4EAA}|BicTechBack\\BicTechBack.csproj|c:\\users\\emi\\desktop\\guardar\\.net proyectos\\repos\\bictech\\bictechback\\bictechback\\src\\core\\services\\usuarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8A177184-3480-40F3-9E3D-9394DD6F4EAA}|BicTechBack\\BicTechBack.csproj|solutionrelative:bictechback\\src\\core\\services\\usuarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8A177184-3480-40F3-9E3D-9394DD6F4EAA}|BicTechBack\\BicTechBack.csproj|c:\\users\\emi\\desktop\\guardar\\.net proyectos\\repos\\bictech\\bictechback\\bictechback\\src\\core\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8A177184-3480-40F3-9E3D-9394DD6F4EAA}|BicTechBack\\BicTechBack.csproj|solutionrelative:bictechback\\src\\core\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,27 +31,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "UsuarioServiceIntegration.cs",
-              "DocumentMoniker": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\IntegrationTests\\Integration\\Services\\UsuarioServiceIntegration.cs",
-              "RelativeDocumentMoniker": "IntegrationTests\\Integration\\Services\\UsuarioServiceIntegration.cs",
-              "ToolTip": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\IntegrationTests\\Integration\\Services\\UsuarioServiceIntegration.cs",
-              "RelativeToolTip": "IntegrationTests\\Integration\\Services\\UsuarioServiceIntegration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAjAAAAAAAAAA==",
+              "Title": "AuthServiceIntegration.cs",
+              "DocumentMoniker": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\IntegrationTests\\Services\\AuthServiceIntegration.cs",
+              "RelativeDocumentMoniker": "IntegrationTests\\Services\\AuthServiceIntegration.cs",
+              "ToolTip": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\IntegrationTests\\Services\\AuthServiceIntegration.cs",
+              "RelativeToolTip": "IntegrationTests\\Services\\AuthServiceIntegration.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAAAwwCcBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-28T01:58:11.078Z",
+              "WhenOpened": "2025-08-28T16:32:37.66Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "UsuarioService.cs",
-              "DocumentMoniker": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack\\src\\Core\\Services\\UsuarioService.cs",
-              "RelativeDocumentMoniker": "BicTechBack\\src\\Core\\Services\\UsuarioService.cs",
-              "ToolTip": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack\\src\\Core\\Services\\UsuarioService.cs",
-              "RelativeToolTip": "BicTechBack\\src\\Core\\Services\\UsuarioService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack\\src\\Core\\Services\\AuthService.cs",
+              "RelativeDocumentMoniker": "BicTechBack\\src\\Core\\Services\\AuthService.cs",
+              "ToolTip": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack\\src\\Core\\Services\\AuthService.cs",
+              "RelativeToolTip": "BicTechBack\\src\\Core\\Services\\AuthService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-28T01:22:52.163Z",
+              "WhenOpened": "2025-08-28T16:32:00.817Z",
               "EditorCaption": ""
             }
           ]

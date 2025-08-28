@@ -1,6 +1,6 @@
 ﻿using BicTechBack.src.Core.DTOs;
 using BicTechBack.src.Core.Interfaces;
-using BicTechBack.src.Infrastructure.Services;
+using BicTechBack.src.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

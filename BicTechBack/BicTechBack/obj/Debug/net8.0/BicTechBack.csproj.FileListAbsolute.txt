@@ -174,10 +174,10 @@ C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBac
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\BicTechB.0EE898CD.Up2Date
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\BicTechBack.dll
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\refint\BicTechBack.dll
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\BicTechBack.pdb
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\BicTechBack.genruntimeconfig.cache
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\ref\BicTechBack.dll
+C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\BicTechBack\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
