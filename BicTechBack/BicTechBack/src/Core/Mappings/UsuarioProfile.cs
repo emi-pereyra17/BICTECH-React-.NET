@@ -14,7 +14,6 @@ namespace BicTechBack.src.Core.Mappings
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Nombre, opt => opt.MapFrom(src => src.Nombre))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
-                .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password))
                 .ForMember(dest => dest.Rol, opt => opt.MapFrom(src => src.Rol.ToString()));
 
             CreateMap<RegisterUsuarioDTO, Usuario>();

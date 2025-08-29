@@ -21,11 +21,6 @@
         public string Email { get; set; }
 
         /// <summary>
-        /// Contraseña del usuario.
-        /// </summary>
-        public string Password { get; set; }
-
-        /// <summary>
         /// Rol asignado al usuario.
         /// </summary>
         public string Rol { get; set; }
