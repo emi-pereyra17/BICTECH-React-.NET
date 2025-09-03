@@ -8,7 +8,7 @@ const EliminarUsuario = () => {
 
   const eliminarCuenta = async () => {
     try {
-      const respuesta = await fetch(`http://localhost:3000/usuarios/${usuario.id}`, {
+      const respuesta = await fetch(`http://localhost:5087/usuarios/${usuario.id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

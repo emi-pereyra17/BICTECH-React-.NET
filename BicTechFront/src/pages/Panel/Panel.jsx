@@ -20,19 +20,19 @@ const Panel = () => {
   const [usuarios, setUsuarios] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/marcas")
+    fetch("http://localhost:5087/marcas")
       .then((res) => res.json())
       .then((data) => setMarcas(data.marcas || []));
 
-    fetch("http://localhost:3000/categorias")
+    fetch("http://localhost:5087/categorias")
       .then((res) => res.json())
       .then((data) => setCategorias(data.categorias || []));
 
-    fetch("http://localhost:3000/categoriaMarca")
+    fetch("http://localhost:5087/categoriaMarca")
       .then((res) => res.json())
       .then((data) => setRelaciones(data.relaciones || []));
 
-    fetch("http://localhost:3000/usuarios")
+    fetch("http://localhost:5087/usuarios")
       .then((res) => res.json())
       .then((data) => setUsuarios(data.usuarios || []));
   }, []);
@@ -56,7 +56,7 @@ const Panel = () => {
               toast.dismiss();
               try {
                 const res = await fetch(
-                  `http://localhost:3000/categorias/${categoria.id}`,
+                  `http://localhost:5087/categorias/${categoria.id}`,
                   {
                     method: "DELETE",
                   }
@@ -157,7 +157,7 @@ const Panel = () => {
               toast.dismiss();
               try {
                 const res = await fetch(
-                  `http://localhost:3000/marcas/${marca.id}`,
+                  `http://localhost:5087/marcas/${marca.id}`,
                   { method: "DELETE" }
                 );
                 if (res.ok) {
@@ -255,7 +255,7 @@ const Panel = () => {
               toast.dismiss();
               try {
                 const res = await fetch(
-                  `http://localhost:3000/categoriaMarca/${relacion.id}`,
+                  `http://localhost:5087/categoriaMarca/${relacion.id}`,
                   { method: "DELETE" }
                 );
                 if (res.ok) {
@@ -316,7 +316,7 @@ const Panel = () => {
               toast.dismiss();
               try {
                 const res = await fetch(
-                  `http://localhost:3000/usuarios/${usuario.id}`,
+                  `http://localhost:5087/usuarios/${usuario.id}`,
                   { method: "DELETE" }
                 );
                 if (res.ok) {

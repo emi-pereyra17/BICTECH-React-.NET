@@ -42,7 +42,7 @@ const CardModificarCategoria = ({
               setLoading(true);
               try {
                 const res = await fetch(
-                  `http://localhost:3000/categorias/${categoria.id}`,
+                  `http://localhost:5087/categorias/${categoria.id}`,
                   {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },

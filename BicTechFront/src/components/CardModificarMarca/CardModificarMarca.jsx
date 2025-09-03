@@ -48,7 +48,7 @@ const CardModificarMarca = ({
               setLoading(true);
               try {
                 const res = await fetch(
-                  `http://localhost:3000/marcas/${marca.id}`,
+                  `http://localhost:5087/marcas/${marca.id}`,
                   {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },

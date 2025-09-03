@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BicTechBack.IntegrationTests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+02610b8e804f5807a89bc4504d7b9bcfd40b8b92")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+40da45ab9e756bddbe8b932e1105e1d77c10411c")]
 [assembly: System.Reflection.AssemblyProductAttribute("BicTechBack.IntegrationTests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BicTechBack.IntegrationTests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

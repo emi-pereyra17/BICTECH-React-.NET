@@ -16,7 +16,7 @@ const ActualizarPassword = () => {
     }
 
     try {
-      const respuesta = await fetch(`http://localhost:3000/auth/password/${usuario.id}`, {
+      const respuesta = await fetch(`http://localhost:5087/auth/password/${usuario.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

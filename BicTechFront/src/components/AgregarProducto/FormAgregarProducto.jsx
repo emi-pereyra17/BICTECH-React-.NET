@@ -30,7 +30,7 @@ const FormAgregarProducto = ({
       if (value) {
         try {
           const res = await fetch(
-            `http://localhost:3000/categoriaMarca/categoria/${value}`
+            `http://localhost:5087/categoriaMarca/categoria/${value}`
           );
           const data = await res.json();
           console.log("Respuesta marcas por categoría:", data); 
@@ -58,7 +58,7 @@ const FormAgregarProducto = ({
       return;
     }
     try {
-      const response = await fetch("http://localhost:3000/productos", {
+      const response = await fetch("http://localhost:5087/productos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

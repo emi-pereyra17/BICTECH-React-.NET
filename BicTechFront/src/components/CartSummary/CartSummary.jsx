@@ -31,7 +31,7 @@ const CartSummary = ({ items }) => {
         precio: item.precio ?? item.Producto?.precio ?? 0,
       }));
 
-      const res = await fetch("http://localhost:3000/pedidos", {
+      const res = await fetch("http://localhost:5087/pedidos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

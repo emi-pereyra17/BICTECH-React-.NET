@@ -13,7 +13,7 @@ const Perfil = () => {
   useEffect(() => {
     const fetchPedidos = async () => {
       try {
-        const res = await fetch("http://localhost:3000/pedidos");
+        const res = await fetch("http://localhost:5087/pedidos");
         if (res.ok) {
           const data = await res.json();
           // Filtra los pedidos por usuarioId 

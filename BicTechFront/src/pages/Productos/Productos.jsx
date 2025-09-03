@@ -27,7 +27,7 @@ const Productos = () => {
 
   const fetchProductos = async () => {
   try {
-    const response = await fetch("http://localhost:3000/productos");
+    const response = await fetch("http://localhost:5087/productos");
     const data = await response.json();
     setProductos(Array.isArray(data.productos) ? data.productos : []);
   } catch (error) {

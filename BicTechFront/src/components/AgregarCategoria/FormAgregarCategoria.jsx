@@ -20,7 +20,7 @@ const FormAgregarCategoria = ({ onCategoriaAgregada }) => {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:3000/categorias", {
+      const res = await fetch("http://localhost:5087/categorias", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nombre }),

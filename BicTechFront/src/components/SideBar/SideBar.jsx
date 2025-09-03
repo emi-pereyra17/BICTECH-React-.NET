@@ -16,7 +16,7 @@ const SideBar = ({ children }) => {
   const [showOffcanvas, setShowOffcanvas] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:3000/categorias")
+    fetch("http://localhost:5087/categorias")
       .then((res) => res.json())
       .then((data) =>
         setCategorias(Array.isArray(data) ? data : data.categorias || [])
@@ -26,7 +26,7 @@ const SideBar = ({ children }) => {
   useEffect(() => {
     if (categoriaSeleccionada) {
       fetch(
-        `http://localhost:3000/categoriaMarca/categoria/${categoriaSeleccionada}`
+        `http://localhost:5087/categoriaMarca/categoria/${categoriaSeleccionada}`
       )
         .then((res) => res.json())
         .then((data) =>

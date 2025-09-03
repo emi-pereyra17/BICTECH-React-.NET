@@ -56,7 +56,7 @@ const CardModificarProducto = ({
               toast.dismiss();
               try {
                 const response = await fetch(
-                  `http://localhost:3000/productos/${producto.id}`,
+                  `http://localhost:5087/productos/${producto.id}`,
                   {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },

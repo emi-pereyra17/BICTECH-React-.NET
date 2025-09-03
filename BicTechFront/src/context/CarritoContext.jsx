@@ -10,7 +10,7 @@ export const CarritoProvider = ({ children }) => {
   // Cargar carrito del backend al iniciar sesión
   useEffect(() => {
     if (usuario) {
-      fetch(`http://localhost:3000/carrito/${usuario.id}`)
+      fetch(`http://localhost:5087/carrito/${usuario.id}`)
         .then((res) => res.json())
         .then((data) =>
           setCarrito(data.CarritoDetalles || data.productos || [])
@@ -24,7 +24,7 @@ export const CarritoProvider = ({ children }) => {
   const agregarAlCarrito = async (productoId, cantidad = 1) => {
     if (!usuario) return;
     const res = await fetch(
-      `http://localhost:3000/carrito/${usuario.id}/agregar`,
+      `http://localhost:5087/carrito/${usuario.id}/agregar`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -36,7 +36,7 @@ export const CarritoProvider = ({ children }) => {
       throw new Error(errorData.message || "Error al agregar producto");
     }
     // Refresca el carrito
-    const res2 = await fetch(`http://localhost:3000/carrito/${usuario.id}`);
+    const res2 = await fetch(`http://localhost:5087/carrito/${usuario.id}`);
     const data = await res2.json();
     setCarrito(data.CarritoDetalles || data.productos || []);
   };
@@ -45,7 +45,7 @@ export const CarritoProvider = ({ children }) => {
   const actualizarCantidad = async (productoId, cantidad) => {
     if (!usuario) return;
     const res = await fetch(
-      `http://localhost:3000/carrito/${usuario.id}/actualizar`,
+      `http://localhost:5087/carrito/${usuario.id}/actualizar`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -56,7 +56,7 @@ export const CarritoProvider = ({ children }) => {
       const errorData = await res.json();
       throw new Error(errorData.message || "Error al actualizar cantidad");
     }
-    const res2 = await fetch(`http://localhost:3000/carrito/${usuario.id}`);
+    const res2 = await fetch(`http://localhost:5087/carrito/${usuario.id}`);
     const data = await res2.json();
     setCarrito(data.CarritoDetalles || data.productos || []);
   };
@@ -65,7 +65,7 @@ export const CarritoProvider = ({ children }) => {
   const quitarDelCarrito = async (productoId) => {
     if (!usuario) return;
     const res = await fetch(
-      `http://localhost:3000/carrito/${usuario.id}/quitar/${productoId}`,
+      `http://localhost:5087/carrito/${usuario.id}/quitar/${productoId}`,
       {
         method: "DELETE",
       }
@@ -74,7 +74,7 @@ export const CarritoProvider = ({ children }) => {
       const errorData = await res.json();
       throw new Error(errorData.message || "Error al quitar producto");
     }
-    const res2 = await fetch(`http://localhost:3000/carrito/${usuario.id}`);
+    const res2 = await fetch(`http://localhost:5087/carrito/${usuario.id}`);
     const data = await res2.json();
     setCarrito(data.CarritoDetalles || data.productos || []);
   };
@@ -83,7 +83,7 @@ export const CarritoProvider = ({ children }) => {
   const vaciarCarrito = async () => {
     if (!usuario) return;
     const res = await fetch(
-      `http://localhost:3000/carrito/${usuario.id}/vaciar`,
+      `http://localhost:5087/carrito/${usuario.id}/vaciar`,
       {
         method: "DELETE",
       }

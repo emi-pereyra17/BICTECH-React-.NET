@@ -17,7 +17,7 @@ const FormAgregarRelacion = ({ categorias = [], marcas = [], onRelacionAgregada 
     setLoading(true);
 
     try {
-  const res = await fetch("http://localhost:3000/categoriaMarca", {
+  const res = await fetch("http://localhost:5087/categoriaMarca", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ categoriaId: Number(categoriaId), marcaId: Number(marcaId) }),

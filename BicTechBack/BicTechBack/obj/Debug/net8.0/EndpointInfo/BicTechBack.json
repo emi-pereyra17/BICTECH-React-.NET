@@ -1894,8 +1894,21 @@
         "additionalProperties": false,
         "description": "DTO para registrar un nuevo usuario en el sistema."
       }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "Ingresa 'Bearer' seguido de tu token JWT",
+        "name": "Authorization",
+        "in": "header"
+      }
     }
   },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ],
   "tags": [
     {
       "name": "Auth",
