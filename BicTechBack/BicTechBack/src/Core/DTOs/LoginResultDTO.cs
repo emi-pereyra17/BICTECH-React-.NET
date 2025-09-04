@@ -29,5 +29,10 @@
         /// Correo electrónico del usuario autenticado.
         /// </summary>
         public string Email { get; set; }
+
+        /// <summary>
+        /// Rol del usuario autenticado (e.g., Admin, User).
+        /// </summary>
+        public string Rol { get; set; }
     }
 }

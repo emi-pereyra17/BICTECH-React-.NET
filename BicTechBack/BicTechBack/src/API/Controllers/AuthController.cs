@@ -77,7 +77,9 @@ namespace BicTechBack.src.API.Controllers
             {
                 var result = await _authService.LoginUserAsync(dto);
                 _logger.LogInformation("Login exitoso para el usuario: {Email}", dto.Email);
-                return Ok(new { token = result.Token, user = new { id = result.UsuarioId, nombre = result.Nombre, email = result.Email } });
+                return Ok(new { token = result.Token, user = new { id = result.UsuarioId, nombre = result.Nombre, email = result.Email,
+                    rol = result.Rol
+                } });
             }
             catch (InvalidOperationException ex)
             {

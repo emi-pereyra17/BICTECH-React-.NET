@@ -65,7 +65,8 @@ namespace BicTechBack.src.Core.Services
                 RefreshToken = refreshToken,
                 UsuarioId = usuario.Id,
                 Nombre = usuario.Nombre,
-                Email = usuario.Email
+                Email = usuario.Email,
+                Rol = usuario.Rol.ToString()
             };
         }
 

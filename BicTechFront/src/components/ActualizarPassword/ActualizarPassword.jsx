@@ -21,9 +21,7 @@ const ActualizarPassword = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          password: nueva,
-        }),
+        body: JSON.stringify(nueva),
       });
 
       const datos = await respuesta.json();

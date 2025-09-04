@@ -8,12 +8,16 @@ const EliminarUsuario = () => {
 
   const eliminarCuenta = async () => {
     try {
-      const respuesta = await fetch(`http://localhost:5087/usuarios/${usuario.id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const respuesta = await fetch(
+        `http://localhost:5087/usuarios/${usuario.id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
 
       if (respuesta.ok) {
         setMensaje("Cuenta eliminada. Redirigiendo...");

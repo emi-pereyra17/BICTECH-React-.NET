@@ -1,7 +1,20 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8A177184-3480-40F3-9E3D-9394DD6F4EAA}|BicTechBack\\BicTechBack.csproj|c:\\users\\emi\\desktop\\guardar\\.net proyectos\\repos\\bictech\\bictechback\\bictechback\\src\\api\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8A177184-3480-40F3-9E3D-9394DD6F4EAA}|BicTechBack\\BicTechBack.csproj|solutionrelative:bictechback\\src\\api\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A177184-3480-40F3-9E3D-9394DD6F4EAA}|BicTechBack\\BicTechBack.csproj|c:\\users\\emi\\desktop\\guardar\\.net proyectos\\repos\\bictech\\bictechback\\bictechback\\src\\core\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8A177184-3480-40F3-9E3D-9394DD6F4EAA}|BicTechBack\\BicTechBack.csproj|solutionrelative:bictechback\\src\\core\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A177184-3480-40F3-9E3D-9394DD6F4EAA}|BicTechBack\\BicTechBack.csproj|c:\\users\\emi\\desktop\\guardar\\.net proyectos\\repos\\bictech\\bictechback\\bictechback\\src\\api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8A177184-3480-40F3-9E3D-9394DD6F4EAA}|BicTechBack\\BicTechBack.csproj|solutionrelative:bictechback\\src\\api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -18,6 +31,45 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack\\src\\Core\\Services\\AuthService.cs",
+              "RelativeDocumentMoniker": "BicTechBack\\src\\Core\\Services\\AuthService.cs",
+              "ToolTip": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack\\src\\Core\\Services\\AuthService.cs",
+              "RelativeToolTip": "BicTechBack\\src\\Core\\Services\\AuthService.cs",
+              "ViewState": "AgIAAJYAAAAAAAAAAAAmwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-04T02:00:32.584Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack\\src\\API\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "BicTechBack\\src\\API\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack\\src\\API\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "BicTechBack\\src\\API\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAowLQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-04T01:40:27.188Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UsuarioController.cs",
+              "DocumentMoniker": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack\\src\\API\\Controllers\\UsuarioController.cs",
+              "RelativeDocumentMoniker": "BicTechBack\\src\\API\\Controllers\\UsuarioController.cs",
+              "ToolTip": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack\\src\\API\\Controllers\\UsuarioController.cs",
+              "RelativeToolTip": "BicTechBack\\src\\API\\Controllers\\UsuarioController.cs",
+              "ViewState": "AgIAAJsAAAAAAAAAAAAcwKMAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-04T01:38:52.933Z",
+              "EditorCaption": ""
             }
           ]
         }

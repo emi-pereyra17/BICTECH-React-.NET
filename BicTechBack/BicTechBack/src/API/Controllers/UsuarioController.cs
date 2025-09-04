@@ -3,6 +3,7 @@ using BicTechBack.src.Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Security.Claims;
 
 namespace BicTechBack.src.API.Controllers
 {
@@ -155,8 +156,27 @@ namespace BicTechBack.src.API.Controllers
         /// <param name="id">Identificador del usuario a eliminar.</param>
         /// <returns>Resultado de la operación.</returns>
         [HttpDelete("{id:int}")]
+        [Authorize]
         public async Task<ActionResult> Delete(int id)
         {
+
+            var userIdClaim = User.FindFirst("sub"); 
+            var roleClaim = User.FindFirst(ClaimTypes.Role); 
+
+            if (userIdClaim == null || roleClaim == null)
+            {
+                return Forbid();
+            }
+
+            var userId = int.Parse(userIdClaim.Value);
+            var userRole = roleClaim.Value;
+
+
+            if (userRole != "Admin" && userId != id)
+            {
+                return Forbid();
+            }
+
             _logger.LogInformation("Intentando eliminar usuario. Id: {Id}", id);
             try
             {
