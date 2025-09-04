@@ -13,10 +13,14 @@ const Perfil = () => {
   useEffect(() => {
     const fetchPedidos = async () => {
       try {
-        const res = await fetch("http://localhost:5087/pedidos");
+        const res = await fetch("http://localhost:5087/pedidos", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
         if (res.ok) {
           const data = await res.json();
-          // Filtra los pedidos por usuarioId 
+          // Filtra los pedidos por usuarioId
           const pedidosUsuario = (data.pedidos || []).filter(
             (pedido) => pedido.usuarioId === usuario?.id
           );

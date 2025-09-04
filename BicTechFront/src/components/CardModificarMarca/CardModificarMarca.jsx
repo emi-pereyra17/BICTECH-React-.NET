@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import ValidationsForms from "../Validations/ValidationsForms";
 
-const CardModificarMarca = ({
-  marca,
-  onClose,
-  onMarcaModificada,
-}) => {
+const CardModificarMarca = ({ marca, onClose, onMarcaModificada }) => {
   const [nombre, setNombre] = useState(marca.nombre);
   const [loading, setLoading] = useState(false);
   const [errores, setErrores] = useState({});
@@ -51,14 +47,16 @@ const CardModificarMarca = ({
                   `http://localhost:5087/marcas/${marca.id}`,
                   {
                     method: "PUT",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ nombre }),
+                    headers: {
+                      "Content-Type": "application/json",
+                      Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                    body: JSON.stringify({ Nombre: nombre }),
                   }
                 );
                 if (res.ok) {
                   toast.success("Marca modificada");
-                  onMarcaModificada &&
-                    onMarcaModificada({ ...marca, nombre });
+                  onMarcaModificada && onMarcaModificada({ ...marca, nombre });
                   onClose && onClose();
                 } else {
                   toast.error("No se pudo modificar la marca.");
@@ -123,7 +121,9 @@ const CardModificarMarca = ({
             disabled={loading}
           />
           {errores.nombre && (
-            <p style={{ color: "red", marginTop: "-0.8rem" }}>{errores.nombre}</p>
+            <p style={{ color: "red", marginTop: "-0.8rem" }}>
+              {errores.nombre}
+            </p>
           )}
           <button
             type="submit"

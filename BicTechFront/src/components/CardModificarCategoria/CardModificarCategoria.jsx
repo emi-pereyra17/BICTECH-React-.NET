@@ -45,8 +45,11 @@ const CardModificarCategoria = ({
                   `http://localhost:5087/categorias/${categoria.id}`,
                   {
                     method: "PUT",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ nombre }),
+                    headers: {
+                      "Content-Type": "application/json",
+                      Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                    body: JSON.stringify({ Nombre: nombre }),
                   }
                 );
                 if (res.ok) {
@@ -117,7 +120,9 @@ const CardModificarCategoria = ({
             disabled={loading}
           />
           {errores.nombre && (
-            <p style={{ color: "red", marginTop: "-0.8rem" }}>{errores.nombre}</p>
+            <p style={{ color: "red", marginTop: "-0.8rem" }}>
+              {errores.nombre}
+            </p>
           )}
           <button
             type="submit"

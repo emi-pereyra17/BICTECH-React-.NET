@@ -57,6 +57,10 @@ function CardProducto({
                   `http://localhost:5087/productos/${producto.id}`,
                   {
                     method: "DELETE",
+                    headers: {
+                      "Content-Type": "application/json",
+                      Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
                   }
                 );
                 if (response.ok) {

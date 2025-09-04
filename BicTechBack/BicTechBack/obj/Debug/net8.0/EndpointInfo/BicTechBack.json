@@ -251,7 +251,7 @@
         "tags": [
           "Carrito"
         ],
-        "summary": "Vacía el carrito de un usuario.\r\nSolo accesible para administradores.",
+        "summary": "Vacía el carrito de un usuario.\r\nSolo el usuario propietario o un administrador puede vaciar el carrito.",
         "parameters": [
           {
             "name": "usuarioId",
@@ -318,7 +318,7 @@
         "tags": [
           "Carrito"
         ],
-        "summary": "Elimina un producto del carrito de un usuario.\r\nSolo accesible para administradores.",
+        "summary": "Elimina un producto del carrito de un usuario.\r\nSolo el usuario propietario o un administrador puede eliminar productos.",
         "parameters": [
           {
             "name": "usuarioId",

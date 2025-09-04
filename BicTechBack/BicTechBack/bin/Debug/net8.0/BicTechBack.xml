@@ -146,7 +146,7 @@
         <member name="M:BicTechBack.src.API.Controllers.CarritoController.DeleteProductoFromCarrito(System.Int32,System.Int32)">
             <summary>
             Elimina un producto del carrito de un usuario.
-            Solo accesible para administradores.
+            Solo el usuario propietario o un administrador puede eliminar productos.
             </summary>
             <param name="usuarioId">Identificador del usuario.</param>
             <param name="productoId">Identificador del producto a eliminar.</param>
@@ -155,7 +155,7 @@
         <member name="M:BicTechBack.src.API.Controllers.CarritoController.ClearCarrito(System.Int32)">
             <summary>
             Vacía el carrito de un usuario.
-            Solo accesible para administradores.
+            Solo el usuario propietario o un administrador puede vaciar el carrito.
             </summary>
             <param name="usuarioId">Identificador del usuario.</param>
             <returns>Carrito vacío.</returns>
@@ -809,6 +809,11 @@
         <member name="P:BicTechBack.src.Core.DTOs.LoginResultDTO.Email">
             <summary>
             Correo electrónico del usuario autenticado.
+            </summary>
+        </member>
+        <member name="P:BicTechBack.src.Core.DTOs.LoginResultDTO.Rol">
+            <summary>
+            Rol del usuario autenticado (e.g., Admin, User).
             </summary>
         </member>
         <member name="T:BicTechBack.src.Core.DTOs.LoginUsuarioDTO">

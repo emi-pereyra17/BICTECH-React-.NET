@@ -33,7 +33,7 @@ const FormAgregarProducto = ({
             `http://localhost:5087/categoriaMarca/categoria/${value}`
           );
           const data = await res.json();
-          console.log("Respuesta marcas por categoría:", data); 
+          console.log("Respuesta marcas por categoría:", data);
           setMarcasFiltradas(data.marcas || []);
         } catch {
           setMarcasFiltradas([]);
@@ -60,8 +60,19 @@ const FormAgregarProducto = ({
     try {
       const response = await fetch("http://localhost:5087/productos", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({
+          Nombre: form.nombre,
+          Precio: form.precio,
+          Descripcion: form.descripcion,
+          MarcaId: form.marcaId,
+          CategoriaId: form.categoriaId,
+          Stock: form.stock,
+          ImagenUrl: form.imagenUrl,
+        }),
       });
       if (response.ok) {
         toast.success("Producto agregado correctamente");
@@ -242,9 +253,9 @@ const FormAgregarProducto = ({
             border: "1px solid #000",
             fontWeight: "bold",
             height: "fit-content",
-            fontSize: "1rem", 
-            padding: "0.5rem 2rem", 
-            borderRadius: "8px", 
+            fontSize: "1rem",
+            padding: "0.5rem 2rem",
+            borderRadius: "8px",
           }}
         >
           Guardar
@@ -260,9 +271,9 @@ const FormAgregarProducto = ({
             border: "1px solid #000",
             fontWeight: "bold",
             height: "fit-content",
-            fontSize: "1rem", 
-            padding: "0.5rem 2rem", 
-            borderRadius: "8px", 
+            fontSize: "1rem",
+            padding: "0.5rem 2rem",
+            borderRadius: "8px",
           }}
         >
           Cancelar

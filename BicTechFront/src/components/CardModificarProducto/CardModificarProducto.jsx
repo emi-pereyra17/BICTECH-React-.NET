@@ -59,8 +59,17 @@ const CardModificarProducto = ({
                   `http://localhost:5087/productos/${producto.id}`,
                   {
                     method: "PUT",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(form),
+                    headers: {
+                      "Content-Type": "application/json",
+                      Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                    body: JSON.stringify({
+                      Nombre: form.nombre,
+                      Precio: form.precio,
+                      Descripcion: form.descripcion,
+                      Stock: form.stock,
+                      ImagenUrl: form.imagenUrl,
+                    }),
                   }
                 );
                 if (response.ok) {

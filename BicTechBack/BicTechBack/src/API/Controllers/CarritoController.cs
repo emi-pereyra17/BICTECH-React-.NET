@@ -176,17 +176,26 @@ namespace BicTechBack.src.API.Controllers
             }
         }
 
+        // ...
         /// <summary>
         /// Elimina un producto del carrito de un usuario.
-        /// Solo accesible para administradores.
+        /// Solo el usuario propietario o un administrador puede eliminar productos.
         /// </summary>
         /// <param name="usuarioId">Identificador del usuario.</param>
         /// <param name="productoId">Identificador del producto a eliminar.</param>
         /// <returns>Carrito actualizado.</returns>
         [HttpDelete("{usuarioId:int}/productos/{productoId:int}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "User, Admin")]
         public async Task<IActionResult> DeleteProductoFromCarrito(int usuarioId, int productoId)
         {
+            var isAdmin = User.IsInRole("Admin");
+            var userIdClaim = int.Parse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value);
+            if (!isAdmin && usuarioId != userIdClaim)
+            {
+                _logger.LogWarning("Usuario no autorizado para eliminar producto del carrito. UsuarioId: {UsuarioId}", usuarioId);
+                return Forbid();
+            }
+
             _logger.LogInformation("Eliminando producto {ProductoId} del carrito del usuario {UsuarioId}", productoId, usuarioId);
             try
             {
@@ -203,14 +212,22 @@ namespace BicTechBack.src.API.Controllers
 
         /// <summary>
         /// Vacía el carrito de un usuario.
-        /// Solo accesible para administradores.
+        /// Solo el usuario propietario o un administrador puede vaciar el carrito.
         /// </summary>
         /// <param name="usuarioId">Identificador del usuario.</param>
         /// <returns>Carrito vacío.</returns>
         [HttpDelete("{usuarioId:int}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "User, Admin")]
         public async Task<IActionResult> ClearCarrito(int usuarioId)
         {
+            var isAdmin = User.IsInRole("Admin");
+            var userIdClaim = int.Parse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value);
+            if (!isAdmin && usuarioId != userIdClaim)
+            {
+                _logger.LogWarning("Usuario no autorizado para vaciar el carrito. UsuarioId: {UsuarioId}", usuarioId);
+                return Forbid();
+            }
+
             _logger.LogInformation("Limpiando carrito del usuario {UsuarioId}", usuarioId);
             try
             {

@@ -25,7 +25,7 @@ const CartSummary = ({ items }) => {
       return;
     }
     try {
-      const productos = items.map(item => ({
+      const productos = items.map((item) => ({
         productoId: item.productoId,
         cantidad: item.cantidad,
         precio: item.precio ?? item.Producto?.precio ?? 0,
@@ -33,7 +33,10 @@ const CartSummary = ({ items }) => {
 
       const res = await fetch("http://localhost:5087/pedidos", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
         body: JSON.stringify({
           usuarioId: usuario.id,
           direccionEnvio,
@@ -61,12 +64,21 @@ const CartSummary = ({ items }) => {
   }, 0);
 
   return (
-    <div className="card text-light shadow-sm" style={{ backgroundColor: "#000", border: "1px solid #d4af37" }}>
+    <div
+      className="card text-light shadow-sm"
+      style={{ backgroundColor: "#000", border: "1px solid #d4af37" }}
+    >
       <div className="card-body">
-        <h4 className="card-title" style={{ color: "#d4af37" }}>Resumen de compra</h4>
+        <h4 className="card-title" style={{ color: "#d4af37" }}>
+          Resumen de compra
+        </h4>
         <hr style={{ borderColor: "#d4af37" }} />
         <div className="mb-3">
-          <label htmlFor="direccionEnvio" className="form-label" style={{ color: "#d4af37" }}>
+          <label
+            htmlFor="direccionEnvio"
+            className="form-label"
+            style={{ color: "#d4af37" }}
+          >
             Dirección de envío
           </label>
           <input
@@ -74,7 +86,7 @@ const CartSummary = ({ items }) => {
             id="direccionEnvio"
             className="form-control"
             value={direccionEnvio}
-            onChange={e => setDireccionEnvio(e.target.value)}
+            onChange={(e) => setDireccionEnvio(e.target.value)}
             placeholder="Ingrese su dirección"
           />
         </div>

@@ -59,6 +59,9 @@ const Panel = () => {
                   `http://localhost:5087/categorias/${categoria.id}`,
                   {
                     method: "DELETE",
+                    headers: {
+                      Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
                   }
                 );
                 if (res.ok) {
@@ -158,7 +161,12 @@ const Panel = () => {
               try {
                 const res = await fetch(
                   `http://localhost:5087/marcas/${marca.id}`,
-                  { method: "DELETE" }
+                  {
+                    method: "DELETE",
+                    headers: {
+                      Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                  }
                 );
                 if (res.ok) {
                   setMarcas((prev) => prev.filter((m) => m.id !== marca.id));
@@ -256,7 +264,12 @@ const Panel = () => {
               try {
                 const res = await fetch(
                   `http://localhost:5087/categoriaMarca/${relacion.id}`,
-                  { method: "DELETE" }
+                  {
+                    method: "DELETE",
+                    headers: {
+                      Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                  }
                 );
                 if (res.ok) {
                   setRelaciones((prev) =>
@@ -317,7 +330,12 @@ const Panel = () => {
               try {
                 const res = await fetch(
                   `http://localhost:5087/usuarios/${usuario.id}`,
-                  { method: "DELETE" }
+                  {
+                    method: "DELETE",
+                    headers: {
+                      Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                  }
                 );
                 if (res.ok) {
                   setUsuarios((prev) =>

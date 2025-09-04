@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
-const FormAgregarRelacion = ({ categorias = [], marcas = [], onRelacionAgregada }) => {
+const FormAgregarRelacion = ({
+  categorias = [],
+  marcas = [],
+  onRelacionAgregada,
+}) => {
   const [categoriaId, setCategoriaId] = useState("");
   const [marcaId, setMarcaId] = useState("");
   const [loading, setLoading] = useState(false);
@@ -17,30 +21,36 @@ const FormAgregarRelacion = ({ categorias = [], marcas = [], onRelacionAgregada 
     setLoading(true);
 
     try {
-  const res = await fetch("http://localhost:5087/categoriaMarca", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ categoriaId: Number(categoriaId), marcaId: Number(marcaId) }),
-  });
-  const text = await res.text();
-  console.log("Respuesta del backend:", text);
-  if (res.ok) {
-    toast.success("Relación agregada correctamente");
-    setCategoriaId("");
-    setMarcaId("");
-    if (onRelacionAgregada) {
-      const data = JSON.parse(text);
-      const relacionAgregada = data.relacion || data.nuevaRelacion || data;
-      onRelacionAgregada(relacionAgregada);
+      const res = await fetch("http://localhost:5087/categoriaMarca", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({
+          CategoriaId: Number(categoriaId),
+          MarcaId: Number(marcaId),
+        }),
+      });
+      const text = await res.text();
+      console.log("Respuesta del backend:", text);
+      if (res.ok) {
+        toast.success("Relación agregada correctamente");
+        setCategoriaId("");
+        setMarcaId("");
+        if (onRelacionAgregada) {
+          const data = JSON.parse(text);
+          const relacionAgregada = data.relacion || data.nuevaRelacion || data;
+          onRelacionAgregada(relacionAgregada);
+        }
+      } else {
+        toast.error("No se pudo agregar la relación");
+      }
+    } catch {
+      toast.error("Error de conexión al agregar relación");
+    } finally {
+      setLoading(false);
     }
-  } else {
-    toast.error("No se pudo agregar la relación");
-  }
-} catch {
-  toast.error("Error de conexión al agregar relación");
-} finally {
-  setLoading(false);
-}
   };
 
   return (
@@ -56,7 +66,7 @@ const FormAgregarRelacion = ({ categorias = [], marcas = [], onRelacionAgregada 
         boxShadow: "0 2px 12px 0 rgba(191,161,0,0.08)",
         maxWidth: "800px",
         width: "600px",
-        margin: "0 auto"
+        margin: "0 auto",
       }}
     >
       <label
@@ -65,7 +75,7 @@ const FormAgregarRelacion = ({ categorias = [], marcas = [], onRelacionAgregada 
           color: "#222",
           fontWeight: "bold",
           marginBottom: "0.5rem",
-          fontSize: "1.1rem"
+          fontSize: "1.1rem",
         }}
       >
         Categoría:
@@ -73,18 +83,18 @@ const FormAgregarRelacion = ({ categorias = [], marcas = [], onRelacionAgregada 
       <select
         id="categoria"
         value={categoriaId}
-        onChange={e => setCategoriaId(e.target.value)}
+        onChange={(e) => setCategoriaId(e.target.value)}
         style={{
           marginBottom: "1rem",
           padding: "0.5rem",
           border: "1px solid #bfa100",
           borderRadius: "6px",
-          width: "100%"
+          width: "100%",
         }}
         disabled={loading}
       >
         <option value="">Selecciona una categoría</option>
-        {categorias.map(cat => (
+        {categorias.map((cat) => (
           <option key={cat.id} value={cat.id}>
             {cat.nombre}
           </option>
@@ -97,7 +107,7 @@ const FormAgregarRelacion = ({ categorias = [], marcas = [], onRelacionAgregada 
           color: "#222",
           fontWeight: "bold",
           marginBottom: "0.5rem",
-          fontSize: "1.1rem"
+          fontSize: "1.1rem",
         }}
       >
         Marca:
@@ -105,18 +115,18 @@ const FormAgregarRelacion = ({ categorias = [], marcas = [], onRelacionAgregada 
       <select
         id="marca"
         value={marcaId}
-        onChange={e => setMarcaId(e.target.value)}
+        onChange={(e) => setMarcaId(e.target.value)}
         style={{
           marginBottom: "1rem",
           padding: "0.5rem",
           border: "1px solid #bfa100",
           borderRadius: "6px",
-          width: "100%"
+          width: "100%",
         }}
         disabled={loading}
       >
         <option value="">Selecciona una marca</option>
-        {marcas.map(marca => (
+        {marcas.map((marca) => (
           <option key={marca.id} value={marca.id}>
             {marca.nombre}
           </option>
@@ -135,7 +145,7 @@ const FormAgregarRelacion = ({ categorias = [], marcas = [], onRelacionAgregada 
           padding: "0.5rem 2rem",
           borderRadius: "8px",
           cursor: loading ? "not-allowed" : "pointer",
-          marginTop: "0.5rem"
+          marginTop: "0.5rem",
         }}
       >
         {loading ? "Agregando..." : "Agregar Relación"}
