@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{8A177184-3480-40F3-9E3D-9394DD6F4EAA}|BicTechBack\\BicTechBack.csproj|c:\\users\\emi\\desktop\\guardar\\.net proyectos\\repos\\bictech\\bictechback\\bictechback\\src\\api\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8A177184-3480-40F3-9E3D-9394DD6F4EAA}|BicTechBack\\BicTechBack.csproj|solutionrelative:bictechback\\src\\api\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{8A177184-3480-40F3-9E3D-9394DD6F4EAA}|BicTechBack\\BicTechBack.csproj|c:\\users\\emi\\desktop\\guardar\\.net proyectos\\repos\\bictech\\bictechback\\bictechback\\src\\core\\entities\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8A177184-3480-40F3-9E3D-9394DD6F4EAA}|BicTechBack\\BicTechBack.csproj|solutionrelative:bictechback\\src\\core\\entities\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -27,12 +31,25 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "UsuarioController.cs",
+              "DocumentMoniker": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack\\src\\API\\Controllers\\UsuarioController.cs",
+              "RelativeDocumentMoniker": "BicTechBack\\src\\API\\Controllers\\UsuarioController.cs",
+              "ToolTip": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack\\src\\API\\Controllers\\UsuarioController.cs",
+              "RelativeToolTip": "BicTechBack\\src\\API\\Controllers\\UsuarioController.cs",
+              "ViewState": "AgIAAJUAAAAAAAAAAAAAAKAAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-06T00:27:05.143Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Usuario.cs",
               "DocumentMoniker": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack\\src\\Core\\Entities\\Usuario.cs",
               "RelativeDocumentMoniker": "BicTechBack\\src\\Core\\Entities\\Usuario.cs",
               "ToolTip": "C:\\Users\\Emi\\Desktop\\GUARDAR\\.NET Proyectos\\repos\\BICTECH\\BicTechBack\\BicTechBack\\src\\Core\\Entities\\Usuario.cs",
               "RelativeToolTip": "BicTechBack\\src\\Core\\Entities\\Usuario.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAA4wAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-04T15:41:00.877Z",
               "EditorCaption": ""

@@ -32,7 +32,11 @@ const Panel = () => {
       .then((res) => res.json())
       .then((data) => setRelaciones(data.relaciones || []));
 
-    fetch("http://localhost:5087/usuarios")
+    fetch("http://localhost:5087/usuarios", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => setUsuarios(data.usuarios || []));
   }, []);
@@ -337,6 +341,7 @@ const Panel = () => {
                     },
                   }
                 );
+                const data = await res.json().catch(() => ({}));
                 if (res.ok) {
                   setUsuarios((prev) =>
                     prev.filter((u) => u.id !== usuario.id)
@@ -344,6 +349,7 @@ const Panel = () => {
                   toast.success("Usuario eliminado");
                 } else {
                   toast.error("No se pudo eliminar el usuario.");
+                  console.error("Error al eliminar usuario:", data);
                 }
               } catch {
                 toast.error("Error de conexión al eliminar.");

@@ -159,20 +159,34 @@ namespace BicTechBack.src.API.Controllers
         [Authorize]
         public async Task<ActionResult> Delete(int id)
         {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier) ?? User.FindFirst("sub");
 
-            var userIdClaim = User.FindFirst("sub"); 
-            var roleClaim = User.FindFirst(ClaimTypes.Role); 
+            var roleClaim = User.Claims.FirstOrDefault(c =>
+                c.Type == ClaimTypes.Role ||
+                c.Type == "role" ||
+                c.Type.EndsWith("/claims/role", StringComparison.OrdinalIgnoreCase)
+            );
+
+            foreach (var claim in User.Claims)
+            {
+                _logger.LogInformation($"Claim: {claim.Type} = {claim.Value}");
+            }
 
             if (userIdClaim == null || roleClaim == null)
             {
                 return Forbid();
             }
 
-            var userId = int.Parse(userIdClaim.Value);
-            var userRole = roleClaim.Value;
+            if (!int.TryParse(userIdClaim.Value, out var userId))
+            {
+                _logger.LogWarning("El claim de identificador no es un int válido: {Value}", userIdClaim.Value);
+                return Forbid();
+            }
+            var userRole = roleClaim?.Value ?? "";
 
+            _logger.LogInformation($"Rol detectado en claim: {userRole}");
 
-            if (userRole != "Admin" && userId != id)
+            if (!string.Equals(userRole, "Admin", StringComparison.OrdinalIgnoreCase) && userId != id)
             {
                 return Forbid();
             }

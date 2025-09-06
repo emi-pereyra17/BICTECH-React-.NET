@@ -97,7 +97,7 @@ function ColorSchemesExample() {
                   Sobre nosotros
                 </Link>
               </li>
-              {rol === "admin" && (
+              {rol && rol.toLowerCase() === "admin" && (
                 <li className="nav-item mx-3 text-nowrap">
                   <Link
                     className="nav-link nav-link-hover text-white fw-bold"
@@ -109,7 +109,7 @@ function ColorSchemesExample() {
               )}
             </ul>
             <div className="d-flex align-items-center mx-3 gap-3">
-              {usuario && rol === "user" && (
+              {usuario && rol && rol.toLowerCase() === "user" && (
                 <Link
                   to="/perfil"
                   className="usuario-header px-3 py-1 me-3 text-decoration-none"
@@ -136,7 +136,7 @@ function ColorSchemesExample() {
                   {usuario.nombre}
                 </Link>
               )}
-              {usuario && rol === "admin" && (
+              {usuario && rol && rol.toLowerCase() === "admin" && (
                 <Link
                   to="/perfil"
                   className="usuario-header px-3 py-1 me-3 text-decoration-none"
@@ -163,7 +163,7 @@ function ColorSchemesExample() {
                   {usuario.nombre}
                 </Link>
               )}
-              {((usuario && rol === "user") || rol === null) && (
+              {((usuario && rol && rol.toLowerCase() === "user") || rol === null) && (
                 <Link
                   to="/carrito"
                   onClick={handleCarritoClick}
