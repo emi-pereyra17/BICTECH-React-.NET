@@ -13,33 +13,87 @@ import { toast } from "react-toastify";
 
 const Panel = () => {
   const [marcas, setMarcas] = useState([]);
+  const [totalMarcas, setTotalMarcas] = useState(0);
+  const [marcaPage, setMarcaPage] = useState(1);
+  const [marcaPageSize, setMarcaPageSize] = useState(10);
   const [categorias, setCategorias] = useState([]);
+  const [totalCategorias, setTotalCategorias] = useState(0);
+  const [categoriaPage, setCategoriaPage] = useState(1);
+  const [categoriaPageSize, setCategoriaPageSize] = useState(10);
   const [relaciones, setRelaciones] = useState([]);
+  const [totalRelaciones, setTotalRelaciones] = useState(0);
+  const [relacionPage, setRelacionPage] = useState(1);
+  const [relacionPageSize, setRelacionPageSize] = useState(10);
   const [categoriaAModificar, setCategoriaAModificar] = useState(null);
   const [marcaAModificar, setMarcaAModificar] = useState(null);
   const [usuarios, setUsuarios] = useState([]);
+  const [totalUsuarios, setTotalUsuarios] = useState(0);
+  const [usuarioPage, setUsuarioPage] = useState(1);
+  const [usuarioPageSize, setUsuarioPageSize] = useState(10);
 
   useEffect(() => {
-    fetch("http://localhost:5087/marcas")
+    fetch(
+      `http://localhost:5087/categorias/paginado?page=${categoriaPage}&pageSize=${categoriaPageSize}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    )
       .then((res) => res.json())
-      .then((data) => setMarcas(data.marcas || []));
+      .then((data) => {
+        setCategorias(data.categorias || []);
+        setTotalCategorias(data.total || 0);
+      });
+  }, [categoriaPage, categoriaPageSize]);
 
-    fetch("http://localhost:5087/categorias")
+  useEffect(() => {
+    fetch(
+      `http://localhost:5087/marcas/paginado?page=${marcaPage}&pageSize=${marcaPageSize}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    )
       .then((res) => res.json())
-      .then((data) => setCategorias(data.categorias || []));
+      .then((data) => {
+        setMarcas(data.marcas || []);
+        setTotalMarcas(data.total || 0);
+      });
+  }, [marcaPage, marcaPageSize]);
 
-    fetch("http://localhost:5087/categoriaMarca")
+  useEffect(() => {
+    fetch(
+      `http://localhost:5087/categoriaMarca/paginado?page=${relacionPage}&pageSize=${relacionPageSize}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    )
       .then((res) => res.json())
-      .then((data) => setRelaciones(data.relaciones || []));
+      .then((data) => {
+        setRelaciones(data.cms || []);
+        setTotalRelaciones(data.total || 0);
+      });
+  }, [relacionPage, relacionPageSize]);
 
-    fetch("http://localhost:5087/usuarios", {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
+  useEffect(() => {
+    fetch(
+      `http://localhost:5087/usuarios/paginado?page=${usuarioPage}&pageSize=${usuarioPageSize}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    )
       .then((res) => res.json())
-      .then((data) => setUsuarios(data.usuarios || []));
-  }, []);
+      .then((data) => {
+        setUsuarios(data.usuarios || []);
+        setTotalUsuarios(data.total || 0);
+      });
+  }, [usuarioPage, usuarioPageSize]);
 
   const handleEliminarCategoria = (categoria) => {
     toast.info(
@@ -69,9 +123,22 @@ const Panel = () => {
                   }
                 );
                 if (res.ok) {
-                  setCategorias((prev) =>
-                    prev.filter((c) => c.id !== categoria.id)
-                  );
+                  // Recarga la página actual de categorías
+                  fetch(
+                    `http://localhost:5087/categorias/paginado?page=${categoriaPage}&pageSize=${categoriaPageSize}`,
+                    {
+                      headers: {
+                        Authorization: `Bearer ${localStorage.getItem(
+                          "token"
+                        )}`,
+                      },
+                    }
+                  )
+                    .then((res) => res.json())
+                    .then((data) => {
+                      setCategorias(data.categorias || []);
+                      setTotalCategorias(data.total || 0);
+                    });
                   toast.success("Categoría eliminada");
                 } else {
                   toast.error("No se pudo eliminar la categoría.");
@@ -173,7 +240,21 @@ const Panel = () => {
                   }
                 );
                 if (res.ok) {
-                  setMarcas((prev) => prev.filter((m) => m.id !== marca.id));
+                  fetch(
+                    `http://localhost:5087/marcas/paginado?page=${marcaPage}&pageSize=${marcaPageSize}`,
+                    {
+                      headers: {
+                        Authorization: `Bearer ${localStorage.getItem(
+                          "token"
+                        )}`,
+                      },
+                    }
+                  )
+                    .then((res) => res.json())
+                    .then((data) => {
+                      setMarcas(data.marcas || []);
+                      setTotalMarcas(data.total || 0);
+                    });
                   toast.success("Marca eliminada");
                 } else {
                   toast.error("No se pudo eliminar la marca.");
@@ -247,7 +328,6 @@ const Panel = () => {
     );
   };
 
-  // En tu Panel.jsx
   const handleEliminarRelacion = (relacion) => {
     toast.info(
       <div>
@@ -276,9 +356,21 @@ const Panel = () => {
                   }
                 );
                 if (res.ok) {
-                  setRelaciones((prev) =>
-                    prev.filter((r) => r.id !== relacion.id)
-                  );
+                  fetch(
+                    `http://localhost:5087/categoriaMarca/paginado?page=${relacionPage}&pageSize=${relacionPageSize}`,
+                    {
+                      headers: {
+                        Authorization: `Bearer ${localStorage.getItem(
+                          "token"
+                        )}`,
+                      },
+                    }
+                  )
+                    .then((res) => res.json())
+                    .then((data) => {
+                      setRelaciones(data.cms || []);
+                      setTotalRelaciones(data.total || 0);
+                    });
                   toast.success("Relación eliminada");
                 } else {
                   toast.error("No se pudo eliminar la relación.");
@@ -343,9 +435,21 @@ const Panel = () => {
                 );
                 const data = await res.json().catch(() => ({}));
                 if (res.ok) {
-                  setUsuarios((prev) =>
-                    prev.filter((u) => u.id !== usuario.id)
-                  );
+                  fetch(
+                    `http://localhost:5087/usuarios/paginado?page=${usuarioPage}&pageSize=${usuarioPageSize}`,
+                    {
+                      headers: {
+                        Authorization: `Bearer ${localStorage.getItem(
+                          "token"
+                        )}`,
+                      },
+                    }
+                  )
+                    .then((res) => res.json())
+                    .then((data) => {
+                      setUsuarios(data.usuarios || []);
+                      setTotalUsuarios(data.total || 0);
+                    });
                   toast.success("Usuario eliminado");
                 } else {
                   toast.error("No se pudo eliminar el usuario.");
@@ -549,6 +653,37 @@ const Panel = () => {
           ))}
         </div>
 
+        <div style={{ margin: "1rem 0" }}>
+          <button
+            disabled={categoriaPage === 1}
+            onClick={() => setCategoriaPage((prev) => prev - 1)}
+          >
+            Anterior
+          </button>
+          <span style={{ margin: "0 1rem" }}>
+            Página {categoriaPage} de{" "}
+            {Math.ceil(totalCategorias / categoriaPageSize)}
+          </span>
+          <button
+            disabled={categoriaPage * categoriaPageSize >= totalCategorias}
+            onClick={() => setCategoriaPage((prev) => prev + 1)}
+          >
+            Siguiente
+          </button>
+          <select
+            value={categoriaPageSize}
+            onChange={(e) => {
+              setCategoriaPageSize(Number(e.target.value));
+              setCategoriaPage(1);
+            }}
+            style={{ marginLeft: "1rem" }}
+          >
+            <option value={5}>5</option>
+            <option value={10}>10</option>
+            <option value={20}>20</option>
+          </select>
+        </div>
+
         <br />
         <br />
 
@@ -628,6 +763,35 @@ const Panel = () => {
               onModificar={setMarcaAModificar}
             />
           ))}
+        </div>
+        <div style={{ margin: "1rem 0" }}>
+          <button
+            disabled={marcaPage === 1}
+            onClick={() => setMarcaPage((prev) => prev - 1)}
+          >
+            Anterior
+          </button>
+          <span style={{ margin: "0 1rem" }}>
+            Página {marcaPage} de {Math.ceil(totalMarcas / marcaPageSize)}
+          </span>
+          <button
+            disabled={marcaPage * marcaPageSize >= totalMarcas}
+            onClick={() => setMarcaPage((prev) => prev + 1)}
+          >
+            Siguiente
+          </button>
+          <select
+            value={marcaPageSize}
+            onChange={(e) => {
+              setMarcaPageSize(Number(e.target.value));
+              setMarcaPage(1);
+            }}
+            style={{ marginLeft: "1rem" }}
+          >
+            <option value={5}>5</option>
+            <option value={10}>10</option>
+            <option value={20}>20</option>
+          </select>
         </div>
         <br />
         <br />
@@ -721,6 +885,36 @@ const Panel = () => {
             />
           ))}
         </div>
+        <div style={{ margin: "1rem 0" }}>
+          <button
+            disabled={relacionPage === 1}
+            onClick={() => setRelacionPage((prev) => prev - 1)}
+          >
+            Anterior
+          </button>
+          <span style={{ margin: "0 1rem" }}>
+            Página {relacionPage} de{" "}
+            {Math.ceil(totalRelaciones / relacionPageSize)}
+          </span>
+          <button
+            disabled={relacionPage * relacionPageSize >= totalRelaciones}
+            onClick={() => setRelacionPage((prev) => prev + 1)}
+          >
+            Siguiente
+          </button>
+          <select
+            value={relacionPageSize}
+            onChange={(e) => {
+              setRelacionPageSize(Number(e.target.value));
+              setRelacionPage(1);
+            }}
+            style={{ marginLeft: "1rem" }}
+          >
+            <option value={5}>5</option>
+            <option value={10}>10</option>
+            <option value={20}>20</option>
+          </select>
+        </div>
         <br />
         <h1
           style={{
@@ -796,6 +990,35 @@ const Panel = () => {
               onEliminar={handleEliminarUsuario}
             />
           ))}
+        </div>
+        <div style={{ margin: "1rem 0" }}>
+          <button
+            disabled={usuarioPage === 1}
+            onClick={() => setUsuarioPage((prev) => prev - 1)}
+          >
+            Anterior
+          </button>
+          <span style={{ margin: "0 1rem" }}>
+            Página {usuarioPage} de {Math.ceil(totalUsuarios / usuarioPageSize)}
+          </span>
+          <button
+            disabled={usuarioPage * usuarioPageSize >= totalUsuarios}
+            onClick={() => setUsuarioPage((prev) => prev + 1)}
+          >
+            Siguiente
+          </button>
+          <select
+            value={usuarioPageSize}
+            onChange={(e) => {
+              setUsuarioPageSize(Number(e.target.value));
+              setUsuarioPage(1);
+            }}
+            style={{ marginLeft: "1rem" }}
+          >
+            <option value={5}>5</option>
+            <option value={10}>10</option>
+            <option value={20}>20</option>
+          </select>
         </div>
         <br />
         <br />

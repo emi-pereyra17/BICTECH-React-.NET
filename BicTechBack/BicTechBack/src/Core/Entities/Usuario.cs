@@ -10,7 +10,7 @@
         public ICollection<Pedido> Pedidos { get; set; }
         public ICollection<Carrito> Carritos { get; set; }
 
-        // Agrega estas propiedades:
+        
         public string? RefreshToken { get; set; }
         public DateTime? RefreshTokenExpiryTime { get; set; }
     }
