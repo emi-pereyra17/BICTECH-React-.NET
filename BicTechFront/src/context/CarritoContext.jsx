@@ -9,14 +9,13 @@ export const CarritoProvider = ({ children }) => {
 
   // Cargar carrito del backend al iniciar sesión
   useEffect(() => {
-  if (usuario) {
-    console.log(localStorage.getItem("token"));
-    fetch(`http://localhost:5087/carritos/${usuario.id}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
-      .then(async (res) => {
+    if (usuario) {
+      console.log(localStorage.getItem("token"));
+      fetch(`http://localhost:5087/carritos/${usuario.id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }).then(async (res) => {
         if (!res.ok) {
           // Opcional: puedes mostrar un mensaje de error aquí
           setCarrito([]);
@@ -25,10 +24,10 @@ export const CarritoProvider = ({ children }) => {
         const data = await res.json();
         setCarrito(data.CarritoDetalles || data.productos || []);
       });
-  } else {
-    setCarrito([]);
-  }
-}, [usuario]);
+    } else {
+      setCarrito([]);
+    }
+  }, [usuario]);
 
   // Agregar producto al carrito (llama al backend)
   const agregarAlCarrito = async (productoId, cantidad = 1) => {
@@ -48,7 +47,15 @@ export const CarritoProvider = ({ children }) => {
       throw new Error(errorData.message || "Error al agregar producto");
     }
     // Refresca el carrito
-    const res2 = await fetch(`http://localhost:5087/carritos/${usuario.id}`);
+    const res2 = await fetch(`http://localhost:5087/carritos/${usuario.id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    if (!res2.ok) {
+      setCarrito([]);
+      return;
+    }
     const data = await res2.json();
     setCarrito(data.CarritoDetalles || data.productos || []);
   };
@@ -70,7 +77,15 @@ export const CarritoProvider = ({ children }) => {
       const errorData = await res.json();
       throw new Error(errorData.message || "Error al actualizar cantidad");
     }
-    const res2 = await fetch(`http://localhost:5087/carritos/${usuario.id}`);
+    const res2 = await fetch(`http://localhost:5087/carritos/${usuario.id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    if (!res2.ok) {
+      setCarrito([]);
+      return;
+    }
     const data = await res2.json();
     setCarrito(data.CarritoDetalles || data.productos || []);
   };
@@ -91,7 +106,15 @@ export const CarritoProvider = ({ children }) => {
       const errorData = await res.json();
       throw new Error(errorData.message || "Error al quitar producto");
     }
-    const res2 = await fetch(`http://localhost:5087/carritos/${usuario.id}`);
+    const res2 = await fetch(`http://localhost:5087/carritos/${usuario.id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    if (!res2.ok) {
+      setCarrito([]);
+      return;
+    }
     const data = await res2.json();
     setCarrito(data.CarritoDetalles || data.productos || []);
   };

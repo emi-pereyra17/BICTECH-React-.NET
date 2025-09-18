@@ -58,7 +58,7 @@ const CartSummary = ({ items }) => {
   };
 
   const total = items.reduce((sum, item) => {
-    const precio = Number(item.precio ?? item.Producto?.precio ?? 0);
+    const precio = Number(item.producto?.precio ?? 0);
     const cantidad = Number(item.cantidad ?? 0);
     return sum + precio * cantidad;
   }, 0);

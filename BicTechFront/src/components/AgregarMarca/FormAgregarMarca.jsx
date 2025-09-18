@@ -1,11 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import ValidationsForms from "../Validations/ValidationsForms";
 
 const FormAgregarMarca = ({ onMarcaAgregada }) => {
   const [nombre, setNombre] = useState("");
+  const [paisId, setPaisId] = useState("");
+  const [paises, setPaises] = useState([]);
   const [loading, setLoading] = useState(false);
   const [errores, setErrores] = useState({});
+
+  useEffect(() => {
+    fetch("http://localhost:5087/paises")
+      .then((res) => res.json())
+      .then((data) => setPaises(data.paises || []));
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,6 +22,11 @@ const FormAgregarMarca = ({ onMarcaAgregada }) => {
     if (Object.keys(erroresVal).length > 0) {
       setErrores(erroresVal);
       toast.error(erroresVal.nombre || "Corrige los errores");
+      return;
+    }
+    if (!paisId) {
+      setErrores((prev) => ({ ...prev, paisId: "Debes seleccionar un país" }));
+      toast.error("Debes seleccionar un país");
       return;
     }
     setErrores({});
@@ -26,11 +39,12 @@ const FormAgregarMarca = ({ onMarcaAgregada }) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-        body: JSON.stringify({ Nombre: nombre }),
+        body: JSON.stringify({ Nombre: nombre, PaisId: Number(paisId) }),
       });
       if (res.ok) {
         toast.success("Marca agregada correctamente");
         setNombre("");
+        setPaisId("");
         if (onMarcaAgregada) {
           const data = await res.json();
           const marcaAgregada =
@@ -98,6 +112,50 @@ const FormAgregarMarca = ({ onMarcaAgregada }) => {
           {errores.nombre}
         </p>
       )}
+
+      {/* Select de países */}
+      <label
+        htmlFor="paisId"
+        style={{
+          color: "#222",
+          fontWeight: "bold",
+          marginBottom: "0.5rem",
+          fontSize: "1.1rem",
+        }}
+      >
+        País de la marca:
+      </label>
+      <select
+        id="paisId"
+        name="paisId"
+        value={paisId}
+        onChange={(e) => setPaisId(e.target.value)}
+        style={{
+          marginBottom: "0.5rem",
+          padding: "0.5rem",
+          background: "#fff",
+          color: "#222",
+          border: "1px solid #bfa100",
+          borderRadius: "6px",
+          width: "100%",
+        }}
+        disabled={loading}
+      >
+        <option value="">Selecciona un país</option>
+        {paises.map((pais) => (
+          <option key={pais.id} value={pais.id}>
+            {pais.nombre}
+          </option>
+        ))}
+      </select>
+      {errores.paisId && (
+        <p
+          style={{ color: "red", marginTop: "-0.3rem", marginBottom: "0.5rem" }}
+        >
+          {errores.paisId}
+        </p>
+      )}
+
       <button
         type="submit"
         disabled={loading}

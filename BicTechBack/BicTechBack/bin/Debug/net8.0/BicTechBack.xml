@@ -551,6 +551,11 @@
             Cantidad del producto en el carrito.
             </summary>
         </member>
+        <member name="P:BicTechBack.src.Core.DTOs.CarritoDetalleDTO.Producto">
+            <summary>
+            Producto asociado a este detalle del carrito.
+            </summary>
+        </member>
         <member name="T:BicTechBack.src.Core.DTOs.CarritoDTO">
             <summary>
             DTO que representa un carrito de compras de un usuario.
@@ -971,19 +976,24 @@
             Descripción del producto.
             </summary>
         </member>
-        <member name="P:BicTechBack.src.Core.DTOs.ProductoDTO.CategoriaNombre">
+        <member name="P:BicTechBack.src.Core.DTOs.ProductoDTO.CategoriaId">
             <summary>
-            Nombre de la categoría a la que pertenece el producto.
+            Id de la categoría a la que pertenece el producto.
             </summary>
         </member>
-        <member name="P:BicTechBack.src.Core.DTOs.ProductoDTO.MarcaNombre">
+        <member name="P:BicTechBack.src.Core.DTOs.ProductoDTO.MarcaId">
             <summary>
-            Nombre de la marca a la que pertenece el producto.
+            Id de la marca a la que pertenece el producto.
             </summary>
         </member>
         <member name="P:BicTechBack.src.Core.DTOs.ProductoDTO.Stock">
             <summary>
             Stock disponible del producto.
+            </summary>
+        </member>
+        <member name="P:BicTechBack.src.Core.DTOs.ProductoDTO.ImagenUrl">
+            <summary>
+            Url de la imagen del producto.
             </summary>
         </member>
         <member name="T:BicTechBack.src.Core.DTOs.RefreshRequestDTO">

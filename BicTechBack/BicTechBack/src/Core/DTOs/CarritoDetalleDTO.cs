@@ -24,5 +24,10 @@
         /// Cantidad del producto en el carrito.
         /// </summary>
         public int Cantidad { get; set; }
+
+        /// <summary>
+        /// Producto asociado a este detalle del carrito.
+        /// </summary>
+        public ProductoDTO Producto { get; set; }
     }
 }

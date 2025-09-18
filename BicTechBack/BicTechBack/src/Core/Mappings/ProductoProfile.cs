@@ -14,9 +14,10 @@ namespace BicTechBack.src.Core.Mappings
                 .ForMember(dest => dest.Nombre, opt => opt.MapFrom(src => src.Nombre))
                 .ForMember(dest => dest.Precio, opt => opt.MapFrom(src => src.Precio))
                 .ForMember(dest => dest.Descripcion, opt => opt.MapFrom(src => src.Descripcion))
-                .ForMember(dest => dest.CategoriaNombre, opt => opt.MapFrom(src => src.Categoria != null ? src.Categoria.Nombre : null))
-                .ForMember(dest => dest.MarcaNombre, opt => opt.MapFrom(src => src.Marca != null ? src.Marca.Nombre : null))
-                .ForMember(dest => dest.Stock, opt => opt.MapFrom(src => src.Stock));
+                .ForMember(dest => dest.CategoriaId, opt => opt.MapFrom(src => src.CategoriaId))
+                .ForMember(dest => dest.MarcaId, opt => opt.MapFrom(src => src.MarcaId))
+                .ForMember(dest => dest.Stock, opt => opt.MapFrom(src => src.Stock))
+                .ForMember(dest => dest.ImagenUrl, opt => opt.MapFrom(src => src.ImagenUrl));
         }
     }
 }

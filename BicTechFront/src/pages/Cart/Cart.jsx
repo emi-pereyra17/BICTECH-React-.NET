@@ -5,7 +5,8 @@ import EmptyCart from "../../components/EmptyCart/EmptyCart";
 import { CarritoContext } from "../../context/CarritoContext";
 
 const Cart = () => {
-  const { carrito, actualizarCantidad, quitarDelCarrito } = useContext(CarritoContext);
+  const { carrito, actualizarCantidad, quitarDelCarrito } =
+    useContext(CarritoContext);
 
   const modificarCantidad = (id, nuevaCantidad) => {
     actualizarCantidad(id, nuevaCantidad);
@@ -14,7 +15,7 @@ const Cart = () => {
   const eliminarItem = (id) => {
     quitarDelCarrito(id);
   };
-
+  console.log(carrito);
   return (
     <div className="bg-dark text-light min-vh-100 py-5">
       <div

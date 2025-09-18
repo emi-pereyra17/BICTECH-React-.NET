@@ -26,18 +26,23 @@
         public string Descripcion { get; set; }
 
         /// <summary>
-        /// Nombre de la categoría a la que pertenece el producto.
+        /// Id de la categoría a la que pertenece el producto.
         /// </summary>
-        public string CategoriaNombre { get; set; }
+        public string CategoriaId { get; set; }
 
         /// <summary>
-        /// Nombre de la marca a la que pertenece el producto.
+        /// Id de la marca a la que pertenece el producto.
         /// </summary>
-        public string MarcaNombre { get; set; }
+        public string MarcaId { get; set; }
 
         /// <summary>
         /// Stock disponible del producto.
         /// </summary>
         public int Stock { get; set; }
+
+        /// <summary>
+        /// Url de la imagen del producto.
+        /// </summary>
+        public string ImagenUrl { get; set; }
     }
 }

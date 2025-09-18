@@ -17,7 +17,7 @@ const CartItem = ({ item, onEliminar, onModificarCantidad }) => {
       <div className="card-body d-flex justify-content-between align-items-center">
         <div>
           <h5 className="card-title mb-1" style={{ color: "#d4af37" }}>
-            {item.Producto?.nombre || "Producto"}
+            {item.producto?.nombre}
           </h5>
 
           <p className="card-text mb-1">Cantidad: {item.cantidad}</p>
@@ -41,7 +41,7 @@ const CartItem = ({ item, onEliminar, onModificarCantidad }) => {
           </button>
         </div>
         <h5 className="mb-0" style={{ color: "#d4af37" }}>
-          ${item.precio}
+          ${item.producto?.precio * item.cantidad}
         </h5>
       </div>
     </div>

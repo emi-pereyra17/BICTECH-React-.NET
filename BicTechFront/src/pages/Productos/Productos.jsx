@@ -26,21 +26,30 @@ const Productos = () => {
   }, []);
 
   const fetchProductos = async () => {
-  try {
-    const response = await fetch("http://localhost:5087/productos");
-    const data = await response.json();
-    setProductos(Array.isArray(data.productos) ? data.productos : []);
-  } catch (error) {
-    console.error("Error al obtener productos:", error);
-  }
-};
+    try {
+      const response = await fetch("http://localhost:5087/productos");
+      const data = await response.json();
+      setProductos(Array.isArray(data.productos) ? data.productos : []);
+    } catch (error) {
+      console.error("Error al obtener productos:", error);
+    }
+  };
 
+  console.log(
+    "Filtro:",
+    categoriaSeleccionada,
+    marcaSeleccionada,
+    busqueda,
+    precioMin,
+    precioMax
+  );
+ 
   const productosFiltrados = productos.filter((producto) => {
     const coincideCategoria = categoriaSeleccionada
-      ? producto.categoriaId === categoriaSeleccionada
+      ? Number(producto.categoriaId) === Number(categoriaSeleccionada)
       : true;
     const coincideMarca = marcaSeleccionada
-      ? producto.marcaId === marcaSeleccionada
+      ? Number(producto.marcaId) === Number(marcaSeleccionada)
       : true;
     const coincideBusqueda = busqueda
       ? producto.nombre.toLowerCase().includes(busqueda.toLowerCase())
@@ -87,7 +96,7 @@ const Productos = () => {
           marcaSeleccionada={marcaSeleccionada}
         />
       )}
-      {productoAModificar && usuario && rol === "admin" && (
+      {productoAModificar && usuario && rol?.toLowerCase() === "admin" && (
         <CardModificarProducto
           producto={productoAModificar}
           onClose={() => setProductoAModificar(null)}

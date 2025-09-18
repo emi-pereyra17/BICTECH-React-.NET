@@ -25,6 +25,9 @@ function CardProducto({
   const { usuario, rol } = useContext(AuthContext);
   const { agregarAlCarrito } = useContext(CarritoContext);
 
+  console.log("ROL EN CARDPRODUCTO:", rol);
+  console.log("Producto en CardProducto:", producto);
+
   const handleBtnComprarClick = async (e) => {
     if (!usuario) {
       e.preventDefault();
@@ -94,6 +97,7 @@ function CardProducto({
       { autoClose: false }
     );
   };
+  console.log(usuario, rol);
   return (
     <Card
       style={{
@@ -160,7 +164,7 @@ function CardProducto({
           </div>
         </div>
         <div className="d-flex justify-content-center gap-2 mt-3 mb-2">
-          {rol === "admin" && (
+          {rol?.toLowerCase() === "admin" && (
             <Button
               type="button"
               style={{
@@ -174,7 +178,7 @@ function CardProducto({
               Modificar
             </Button>
           )}
-          {rol === "admin" && (
+          {rol?.toLowerCase() === "admin" && (
             <Button
               type="button"
               style={{
@@ -188,7 +192,7 @@ function CardProducto({
               Eliminar
             </Button>
           )}
-          {rol !== "admin" && (
+          {usuario && rol?.toLowerCase() !== "admin" && (
             <Button
               type="button"
               onClick={handleBtnComprarClick}
@@ -202,7 +206,7 @@ function CardProducto({
               Comprar +
             </Button>
           )}
-          {rol !== "admin" && (
+          {rol?.toLowerCase() !== "admin" && (
             <Button type="button" variant="dark" onClick={onVerDetalles}>
               Ver detalle
             </Button>
