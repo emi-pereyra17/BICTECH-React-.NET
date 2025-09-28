@@ -2,7 +2,6 @@ C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\src\Presen
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\src\Presentation\bin\Debug\net8.0\appsettings.json
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\src\Presentation\bin\Debug\net8.0\Presentation.staticwebassets.endpoints.json
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\src\Presentation\bin\Debug\net8.0\Presentation.exe
-C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\src\Presentation\bin\Debug\net8.0\BicTechBack.xml
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\src\Presentation\bin\Debug\net8.0\Presentation.deps.json
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\src\Presentation\bin\Debug\net8.0\Presentation.runtimeconfig.json
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\src\Presentation\bin\Debug\net8.0\Presentation.dll
@@ -187,3 +186,4 @@ C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\src\Presen
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\src\Presentation\obj\Debug\net8.0\Presentation.pdb
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\src\Presentation\obj\Debug\net8.0\Presentation.genruntimeconfig.cache
 C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\src\Presentation\obj\Debug\net8.0\ref\Presentation.dll
+C:\Users\Emi\Desktop\GUARDAR\.NET Proyectos\repos\BICTECH\BicTechBack\src\Presentation\bin\Debug\net8.0\Presentation.xml

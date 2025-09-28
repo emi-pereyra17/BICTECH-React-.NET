@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <DocumentationFile>bin\Debug\net8.0\BicTechBack.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\net8.0\Presentation.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
