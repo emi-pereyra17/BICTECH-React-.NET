@@ -24,9 +24,12 @@ jobs:
 
       - name: Restore dependencies
         run: dotnet restore BicTechBack/BicTechBack.sln
+        working-directory: BicTechBack
 
       - name: Build
         run: dotnet build BicTechBack/BicTechBack.sln --no-restore --configuration Release
+        working-directory: BicTechBack
 
       - name: Run tests
         run: dotnet test BicTechBack/BicTechBack.sln --no-build --configuration Release --verbosity normal
+        working-directory: BicTechBack
