@@ -23,10 +23,10 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Restore dependencies
-        run: dotnet restore BicTechBack.sln
+        run: dotnet restore BicTechBack/BicTechBack.sln
 
       - name: Build
-        run: dotnet build BicTechBack.sln --no-restore --configuration Release
+        run: dotnet build BicTechBack/BicTechBack.sln --no-restore --configuration Release
 
       - name: Run tests
-        run: dotnet test BicTechBack.sln --no-build --configuration Release --verbosity normal
+        run: dotnet test BicTechBack/BicTechBack.sln --no-build --configuration Release --verbosity normal
