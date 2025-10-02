@@ -4,21 +4,21 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-# Copiar los archivos de proyecto para restaurar dependencias primero (cache)
-COPY BicTechBack.sln ./
+# Copiar todos los proyectos de producción
 COPY src/Application/*.csproj ./src/Application/
 COPY src/Infrastructure/*.csproj ./src/Infrastructure/
 COPY src/Domain/*.csproj ./src/Domain/
 COPY src/Presentation/*.csproj ./src/Presentation/
+COPY BicTechBack.sln ./
 
-# Restaurar dependencias
-RUN dotnet restore BicTechBack.sln
+# Restaurar dependencias solo de Presentation (evita errores de tests)
+RUN dotnet restore src/Presentation/Presentation.csproj
 
-# Copiar el resto del código
+# Copiar todo el código
 COPY . .
 
-# Build y publish
-RUN dotnet publish BicTechBack.sln -c Release -o /app
+# Publicar solo Presentation
+RUN dotnet publish src/Presentation/Presentation.csproj -c Release -o /app
 
 # =========================
 # Etapa 2: Runtime
@@ -26,10 +26,8 @@ RUN dotnet publish BicTechBack.sln -c Release -o /app
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 
-# Copiar archivos publicados desde la etapa build
 COPY --from=build /app .
 
-# Comando de inicio
 ENTRYPOINT ["dotnet", "Presentation.dll"]
 
 
