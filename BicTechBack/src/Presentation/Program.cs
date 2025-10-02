@@ -92,15 +92,12 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-var jwtKey = Environment.GetEnvironmentVariable("JWT_KEY");
+// Leer Jwt de variables de entorno (si existen), sino usar appsettings.json
+var jwtKey = Environment.GetEnvironmentVariable("JWT_KEY") ?? builder.Configuration["Jwt:Key"];
+var jwtIssuer = Environment.GetEnvironmentVariable("JWT_ISSUER") ?? builder.Configuration["Jwt:Issuer"];
+var jwtAudience = Environment.GetEnvironmentVariable("JWT_AUDIENCE") ?? builder.Configuration["Jwt:Audience"];
 
-if (!string.IsNullOrEmpty(jwtKey))
-{
-    builder.Configuration["Jwt:Key"] = jwtKey;
-}
-
-var jwtSettings = builder.Configuration.GetSection("Jwt");
-var key = jwtSettings["Key"];
+var key = jwtKey; // la clave para firmar tokens
 
 builder.Services.AddAuthentication(options =>
 {
